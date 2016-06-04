@@ -68,9 +68,7 @@
                data-background-size="contain">
         <aside class="notes">
           And I work as a Drupal Developer for FFW, the largest Drupal
-          consultancy in the world. Just
-          in case you're looking for work, we're hiring. Hit me up
-          after the session.
+          consultancy in the world.
         </aside>
       </section>
     </section>
@@ -83,8 +81,479 @@
 
     <section>
       <section>
+        <h1>Your First Container</h1>
+      </section>
+      <section>
         <pre><code>
-          $ docker pull debian
+$ docker pull debian
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker run -i -t debian /bin/bash
+        </code></pre>
+      </section>
+      <section>
+        <h2>Listing containers</h2>
+        <pre><code>
+$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+        </code></pre>
+      </section>
+      <section>
+        <h2>Waitaminute, "ps"?</h2>
+      </section>
+      <section>
+        <h2>Listing all containers</h2>
+        <pre><code>
+$ docker ps -a
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited
+        </code></pre>
+      </section>
+      <section>
+        <blockquote>
+          A container is just a process.
+        </blockquote>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Dockerfiles</h1>
+      </section>
+      <section>
+        <pre><code>
+FROM debian:wheezy
+MAINTAINER your_email@example.com
+        </code></pre>
+      </section>
+      <section>
+        <h2>Turtles all the way down</h2>
+      </section>
+      <section>
+        <pre><code>
+$ docker build .
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon
+Step 0 : FROM debian:wheezy
+ ---> 60c52dbe9d91
+Step 1 : MAINTAINER your_email@example.com
+ ---> Running in 486f3a2255b4
+ ---> 64b0d7e8eef9
+Removing intermediate container 486f3a2255b4
+Successfully built 64b0d7e8eef9
+        </code></pre>
+      </section>
+      <section>
+        <h2>Let's run it!</h2>
+        <pre class="fragment"><code>
+$ docker ps -q
+$
+        </code></pre>
+      </section>
+      <section>
+        <h2>Nothing! What the heck!?</h2>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Images and installing software</h1>
+      </section>
+      <section>
+        <pre><code>
+$ docker images
+REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
+                        64b0d7e8eef9   1 minutes ago     85.02 MB
+debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
+debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+root@71724ddf2f01:/# cat /etc/issue
+Debian GNU/Linux 7 \n \l
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+FROM debian:wheezy
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -y apache2
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker build .
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon
+Step 0 : FROM debian:wheezy
+ ---> 60c52dbe9d91
+Step 1 : MAINTAINER your_email@example.com
+ ---> Using cache
+ ---> 64b0d7e8eef9
+Step 2 : RUN apt-get update
+ ---> Running in 8652b461d629
+Get:1 http://security.debian.org wheezy/updates Release.gpg [1554 B]
+...
+Fetched 8438 kB in 7s (1094 kB/s)
+Reading package lists...
+ ---> eefa2fcb15e7
+Removing intermediate container 8652b461d629
+Step 3 : RUN apt-get install -y apache2
+ ---> Running in ef474ef3a976
+Reading package lists...
+Building dependency tree...
+Reading state information...
+…
+Setting up libswitch-perl (2.16-2) ...
+ ---> aa084388ac30
+Removing intermediate container ef474ef3a976
+Successfully built aa084388ac30
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$docker images
+REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
+                        aa084388ac30   2 minutes ago     145 MB
+debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
+debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB
+        </code></pre>
+      </section>
+      <section>
+        <h2>Union FS</h2>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Background Containers</h1>
+      </section>
+      <section>
+        <pre><code>
+$ docker run -i -t aa0 /bin/bash
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ apachectl start
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker run -i -t aa0 apachectl start
+apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker ps -a
+CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
+9d0eab0934fe    aa0        "apachectl start"    2 minutes ago       Exited (0) 2 minutes ago
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker run -i -t aa0 apachectl -D FOREGROUND
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker ps
+CONTAINER ID     IMAGE    COMMAND                CREATED             STATUS
+059950c67e5b     aa0      "apachectl -D FOREGR   About a minute ago   Up About a minute
+        </code></pre>
+      </section>
+      <section>
+        <h2>Stopping a Background Container</h2>
+        <pre><code>
+$ docker kill 864
+864
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Entrypoints</h1>
+      </section>
+      <section>
+        <h2>Default Command</h2>
+        <pre><code>
+CMD [“apachectl”, “-D”, “FOREGROUND”]
+        </code></pre>
+      </section>
+      <section>
+        <h2>Specifying an entrypoint</h2>
+        <pre><code>
+CMD [“-D”, “FOREGROUND”]
+ENTRYPOINT [“apachectl”]
+        </code></pre>
+      </section>
+      <section>
+        <h2>When we ran the cotainer...</h2>
+        <pre><code>
+$ docker run -i -t aa0 apachectl -D FOREGROUND
+        </code></pre>
+        <p>...did this in the container:</p>
+        <pre><code>
+$ /bin/sh -c “apachectl -D FOREGROUND”
+        </code></pre>
+      </section>
+      <section>
+        <h2>Our Dockerfile so far</h2>
+        <pre><code>
+FROM debian:wheezy
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -y apache2
+
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["apachectl"]
+        </code></pre>
+      </section>
+      <section>
+        <h2>Updating an existing container</h2>
+        <code>
+docker build <strong>&lt;your_container_id&gt;</strong>
+        </code>
+      </section>
+      <section>
+        <pre><code>
+$ docker build .
+
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon
+Step 0 : FROM debian:wheezy
+ ---> 60c52dbe9d91
+Step 1 : MAINTAINER your_email@example.com
+ ---> Using cache
+ ---> 64b0d7e8eef9
+Step 2 : RUN apt-get update
+ ---> Using cache
+ ---> eefa2fcb15e7
+Step 3 : RUN apt-get install -y apache2
+ ---> Using cache
+ ---> aa084388ac30
+Step 4 : CMD -D FOREGROUND
+ ---> Running in 32b9f66cf1e3
+ ---> 239ae06b7d68
+Removing intermediate container 32b9f66cf1e3
+Step 5 : ENTRYPOINT apachectl
+ ---> Running in 6ac785739695
+ ---> 72b3cac68438
+Removing intermediate container 6ac785739695
+Successfully built 72b3cac68438
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker run -d 72b
+988bf0c8cdfdf88c42e3673a65597f78693c07b14070cd535962b13b36884560
+
+$ docker ps
+CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
+988bf0c8cdfd        72b           "apachectl -D FOREGR   4 seconds ago       Up 3 seconds
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>There's no place like 127.0.0.1</h1>
+      </section>
+      <section>
+        <pre><code>
+$ boot2docker ip
+192.168.59.103
+        </code></pre>
+      </section>
+      <section>
+        <h2>/etc/hosts</h2>
+        <pre><code>
+192.168.59.103	docker.dev
+        </code></pre>
+      </section>
+      <section>
+        <h2>Exposing Ports</h2>
+        <pre><code>
+EXPOSE 80
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Docker Compose</h1>
+      </section>
+      <section>
+        <pre><code>
+web:
+   build: .
+        </code></pre>
+      </section>
+      <section>
+        <h2>Overriding Dockerfiles</h2>
+        <pre><code>
+web:
+   build: .
+   ports:
+      - “80:80”
+        </code></pre>
+      </section>
+      <section>
+        <h2>"Up"ing a container</h2>
+        <pre><code>
+$ docker-compose up -d
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker-compose kill
+$ docker-compose rm
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+$ docker ps
+CONTAINER ID   COMMAND                STATUS       NAMES
+245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1
+
+$ pwd
+/home/tess/dockerthingy
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Containing your files</h1>
+      </section>
+      <section>
+        <pre><code>
+COPY path/on/host.txt /target/path/on/container.txt
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+FROM debian:wheezy
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -y apache2
+
+COPY index.html /var/www
+
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["apachectl"]
+        </code></pre>
+      </section>
+      <section>
+        <h2>Updating container sets</h2>
+        <code>docker-compose build</code>
+        <p>From your container set's directory</p>
+      </section>
+      <section>
+        <pre><code>
+$ docker-compose up -d
+
+$ curl docker.dev
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Behold, my amazing page!&lt;/h1&gt;
+&lt;p>Okay, yeah, it sucks. Sorry.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>
+      </section>
+      <section>
+        <h2>Volumes</h2>
+        <pre><code>
+web:
+   build: .
+   ports:
+      - “80:80”
+   volumes:
+      - docroot:/var/www
+        </code></pre>
+      </section>
+      <section>
+        <h2>Directory Structure</h2>
+        <pre><code>
+dockerthingy/
+├── docker-compose.yml
+├── Dockerfile
+└── docroot/
+    └── index.html
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Moar Conatainz!</h1>
+      </section>
+      <section>
+        <h2>Docker Hub</h2>
+      </section>
+      <section>
+        <h2>Remote images</h2>
+        <p><code>image</code> directive</p>
+      </section>
+      <section>
+        <pre><code>
+web:
+   build: .docker/web
+   ports:
+      - "80:80"
+   volumes:
+      - docroot:/var/www
+db:
+   image: mysql
+   ports:
+      - 3306:3306
+        </code></pre>
+      </section>
+      <section>
+        <pre><code>
+/home/tess/dockerthingy
+├── .docker
+│   ├── db
+│   └── web
+│       └── Dockerfile
+├── docker-compose.yml
+└── docroot
+    └── index.html
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Configuration</h1>
+      </section>
+      <section>
+        <h2>Environment Directive</h2>
+        <pre><code>
+web:
+   build: .docker/web
+   ports:
+      - "80:80"
+   volumes:
+      - docroot:/var/www
+db:
+   image: mysql
+   ports:
+      - 3306:3306
+   environment:
+      - MYSQL_DB=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASS=thisisawesome
         </code></pre>
       </section>
     </section>
