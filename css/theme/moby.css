@@ -3,6 +3,7 @@
  */
 @import url(../../lib/font/Raleway/Raleway.css);
 @import url(../../lib/font/Comfortaa/Comfortaa.css);
+@import url(../../lib/font/Avalon/Avalon.css);
 @import url(../../lib/font/Share_Tech_Mono/ShareTechMono.css);
 
 .reveal a {
@@ -53,7 +54,7 @@ body {
 .reveal h6 {
     margin: 0 0 20px 0;
     color: #333;
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Avalon", sans-serif;
     font-weight: normal;
     line-height: 1.2;
     /*letter-spacing: 0em;*/

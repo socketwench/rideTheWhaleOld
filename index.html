@@ -75,7 +75,46 @@
 
     <section>
       <section>
+        <h1>"I just want to code!"</h1>
+        <h2>"Not argue with MAMP."</h2>
+      </section>
+      <section>
+        <h2>Problem #1</h2>
+        <p>No Sandboxing.</p>
+      </section>
+      <section>
+        <h2>Problem #2</h2>
+        <p>NOM NOM NOM Disk Space</p>
+      </section>
+      <section>
+        <h2>Problem #3</h2>
+        <p>"Build tool? You mean this Word doc?"</p>
+      </section>
+      <section>
+        <h2>Instructions aren't enough</h2>
+        <p>Because humans are fallible.</p>
+      </section>
+    </section>
+
+    <!--
+    @todo Reduce or eliminate this section.
+    This section isn't really necessary because it can be more easily explained
+    in context later in the talk. Then we can see how Docker solves are pain
+    points with more practicality.
+    -->
+    <section>
+      <section>
         <h1>Why Docker?</h1>
+      </section>
+      <section>
+        <h2>Sandboxing by design</h2>
+      </section>
+      <section>
+        <h2>Painless De-duplication</h2>
+      </section>
+      <section>
+        <h2>Baked-in Build Automation</h2>
+        <p>No need to install anything else.</p>
       </section>
     </section>
 
@@ -102,7 +141,15 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
       </section>
       <section>
         <h2>Waitaminute, "ps"?</h2>
+        <p>Like the UNIX "ps" command?</p>
       </section>
+      <section>
+        <h2>"A container is just a process."</h2>
+        <p class="fragment">Not exactly true, but close.</p>
+      </section>
+      <!--
+      @todo Graphic explaining Docker as an intersection of technologies
+      -->
       <section>
         <h2>Listing all containers</h2>
         <pre><code>
@@ -111,23 +158,36 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
 0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited
         </code></pre>
       </section>
-      <section>
-        <blockquote>
-          A container is just a process.
-        </blockquote>
-      </section>
     </section>
 
     <section>
       <section>
-        <h1>Dockerfiles</h1>
+        <h1>Make a server in just one text file</h1>
       </section>
       <section>
+        <h2>Dockerfiles</h2>
+        <p>Basis of Docker's build system</p>
+      </section>
+      <section>
+        <h2>The first two directives</h2>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com</code></pre>
       </section>
       <section>
         <h2>Turtles all the way down</h2>
+        <p>All containers are build on top of another container</p>
+      </section>
+      <!--
+      @todo Stack graphic showing container image inheritance.
+      -->
+      <section>
+        <h2>"scratch" container</h2>
+        <p>Parent of all Docker containers.</p>
+        <p class="fragment">Just an empty *.tar.gz file</p>
+      </section>
+      <section>
+        <h2>Using your Dockerfile</h2>
+        <p><code>docker build /path/to/Dockerfile</code></p>
       </section>
       <section>
         <pre><code>$ docker build .
@@ -148,12 +208,18 @@ $</code></pre>
       </section>
       <section>
         <h2>Nothing! What the heck!?</h2>
+        <p>It built "successfully" but nothing is running.</p>
+        <p>"Removing intermediate container" is a hint.</p>
       </section>
     </section>
 
     <section>
       <section>
-        <h1>Images and installing software</h1>
+        <h1>Images</h1>
+      </section>
+      <section>
+        <h2>It's not just where you're FROM</h2>
+        <p>Each line in the Dockerfile is like a commit.</p>
       </section>
       <section>
         <pre><code>$ docker images
@@ -165,6 +231,26 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       <section>
         <pre><code>root@71724ddf2f01:/# cat /etc/issue
 Debian GNU/Linux 7 \n \l</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Installing Software</h1>
+      </section>
+      <section>
+        <h2>Docker doesn't "install" anything</h2>
+        <p>It lets the container decide!</p>
+      </section>
+      <section>
+        <h2>Base image decides the tool</h2>
+        <p>Debian and Ubuntu use <code>apt-get</code></p>
+        <p>Red Hat uses <code>yum</code></p>
+        <p>Arch uses <code>pacman</code></p>
+      </section>
+      <section>
+        <h2>RUN directive</h2>
+        <code>RUN some_command -with arguments</code>
+        <p>Runs the specified command in the container</p>
       </section>
       <section>
         <pre><code>FROM debian:wheezy
