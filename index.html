@@ -120,18 +120,71 @@
 
     <section>
       <section>
+        <h1>Getting Docker</h1>
+      </section>
+      <section>
+        <h2>Wait, I need a VM?</h2>
+      </section>
+      <section>
+        <h2>Docker Machine</h2>
+      </section>
+      <section>
+        <h2>Docker Toolbox</h2>
+        <p>Easiest way to install on Mac and Windows</p>
+        <p>https://www.docker.com/products/docker-toolbox</p>
+      </section>
+      <section>
+        <h2>Docker On Linux</h2>
+        <p>Docker's native environment</p>
+        <p>No need for a VM</p>
+      </section>
+      <section>
+        <h2>Installing on Linux</h2>
+        <p>Use your distro's package manager</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
         <h1>Your First Container</h1>
       </section>
       <section>
+        <h2>No, you don't need to install Linux</h2>
+      </section>
+      <section>
+        <h2>Pull command</h2>
+        <code>docker pull the_container_name</code>
+        <p class="fragment">Think: <code>git pull</code></p>
+      </section>
+      <section>
+        <h2>Docker Hub</h2>
+        <p>Online registry of pre-made containers</p>
+        <p>https://hub.docker.com/</p>
+      </section>
+      <section>
+        <h2>Anyone can upload to Hub!</h2>
+        <p>Container "source files" uploaded.</p>
+        <p>Hub "compiles" the container for use.</p>
+      </section>
+      <section>
+        <h2>Official Debian Container</h2>
         <pre><code>
 $ docker pull debian
         </code></pre>
+        <p>Good starter for web projects.</p>
+      </section>
+      <section>
+        <h2>Running a Container</h2>
+        <code>docker run</code>
       </section>
       <section>
         <pre><code>
 $ docker run -i -t debian /bin/bash
         </code></pre>
       </section>
+      <!--
+      @todo Graphic breaking down each part of the run command.
+      -->
       <section>
         <h2>Listing containers</h2>
         <pre><code>
