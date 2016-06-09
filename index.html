@@ -222,6 +222,11 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
         <p>Basis of Docker's build system</p>
       </section>
       <section>
+        <h2>Structure</h2>
+        <code>DIRECTIVE parameter</code>
+        <p class="fragment">https://docs.docker.com/</p>
+      </section>
+      <section>
         <h2>The first two directives</h2>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com</code></pre>
@@ -237,6 +242,11 @@ MAINTAINER your_email@example.com</code></pre>
         <h2>"scratch" container</h2>
         <p>Parent of all Docker containers.</p>
         <p class="fragment">Just an empty *.tar.gz file</p>
+      </section>
+      <section>
+        <h2>FROM directive</h2>
+        <code>FROM name:version</code>
+        <p>Version is optional, defaults to "latest"</p>
       </section>
       <section>
         <h2>Using your Dockerfile</h2>
@@ -255,9 +265,10 @@ Removing intermediate container 486f3a2255b4
 Successfully built 64b0d7e8eef9</code></pre>
       </section>
       <section>
-        <h2>Let's run it!</h2>
+        <h2>Is it running?</h2>
         <pre class="fragment"><code>$ docker ps -q
 $</code></pre>
+        <p><code>-q</code> switch = list only container IDs.</p>
       </section>
       <section>
         <h2>Nothing! What the heck!?</h2>
@@ -271,10 +282,22 @@ $</code></pre>
         <h1>Images</h1>
       </section>
       <section>
+        <h2>VMs are like Pudding</h2>
+        <p>It's one big blob of stuff.</p>
+      </section>
+      <section>
+        <h2>Containers are like Cake</h2>
+        <p>They have layers!</p>
+      </section>
+      <section>
         <h2>It's not just where you're FROM</h2>
         <p>Each line in the Dockerfile is like a commit.</p>
       </section>
+      <!--
+      @todo Graphic correlating lines in the Dockerfile to different overlaid images
+      -->
       <section>
+        <p>Listing images</p>
         <pre><code>$ docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
                         64b0d7e8eef9   1 minutes ago     85.02 MB
@@ -282,18 +305,40 @@ debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       </section>
       <section>
-        <pre><code>root@71724ddf2f01:/# cat /etc/issue
+        <h2>Intermediate containers?</h2>
+      </section>
+      <section>
+        <h2>Containers vs Images</h2>
+      </section>
+      <section>
+        <h2>Base image</h2>
+        <p>It's just an image</p>
+        <p>Usually whatever image you start with</p>
+      </section>
+      <section>
+        <h2>Running a container</h2>
+        <code>docker run c0nt41n3rHa5h /path/to/command</code>
+      </section>
+      <section>
+        <pre><code>$ docker run -i -t 64b /bin/bash</code></pre>
+      </section>
+      <section>
+        <pre><code>root@71724ddf264b:/# cat /etc/issue
 Debian GNU/Linux 7 \n \l</code></pre>
       </section>
     </section>
+
     <section>
       <section>
         <h1>Installing Software</h1>
       </section>
       <section>
-        <h2>Docker doesn't "install" anything</h2>
+        <h2>No INSTALL directive</h2>
         <p>It lets the container decide!</p>
       </section>
+      <!--
+      @TODO THIS. IS. LINUX!!!!!!11?1!
+      -->
       <section>
         <h2>Base image decides the tool</h2>
         <p>Debian and Ubuntu use <code>apt-get</code></p>
@@ -346,6 +391,10 @@ REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
                         aa084388ac30   2 minutes ago     145 MB
 debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
+      </section>
+      <section>
+        <h2>Where'd our image go!?</h2>
+        <p>docker build replaced our old image</p>
       </section>
       <section>
         <h2>Union FS</h2>
