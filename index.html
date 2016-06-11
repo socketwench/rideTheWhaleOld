@@ -406,9 +406,13 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
         <h1>Background Containers</h1>
       </section>
       <section>
+        <h2>Build vs Run Phase</h2>
+      </section>
+      <section>
         <pre><code>$ docker run -i -t aa0 /bin/bash</code></pre>
       </section>
       <section>
+        <h2>Starting Apache</h2>
         <pre><code>
 $ apachectl start
         </code></pre>
@@ -423,12 +427,43 @@ CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
 9d0eab0934fe    aa0        "apachectl start"    2 minutes ago       Exited (0) 2 minutes ago</code></pre>
       </section>
       <section>
+        <!--
+        @TODO Comic anthropromorphizing apachectl?
+        -->
+        <h2>Why'd it stop?</h2>
+        <p>apachectl started apache as a background process</p>
+        <p>Then returned "0"</p>
+      </section>
+      <section>
+        <h2>Remember</h2>
+        <p>A container runs as long as it's process does.</p>
+      </section>
+      <section>
+        <h2>Running Apache in the Foreground</h2>
+        <code>-D FOREGROUND</code>
+        <p>Apache switch, not Docker</p>
+      </section>
+      <section>
         <pre><code>$ docker run -i -t aa0 apachectl -D FOREGROUND</code></pre>
       </section>
       <section>
         <pre><code>$ docker ps
 CONTAINER ID     IMAGE    COMMAND                CREATED             STATUS
 059950c67e5b     aa0      "apachectl -D FOREGR   About a minute ago   Up About a minute</code></pre>
+      </section>
+      <section>
+        <h2>Running a container in the background</h2>
+        <code>docker run -d</code>
+        <p>'d' for 'daemon'</p>
+      </section>
+      <section>
+        <pre><code>$ docker run -d aa0 apachectl -D FOREGROUND
+86414f5548dcecb83d80dec4ec9351a7697b23d11664738f8668167a127ec70e</code></pre>
+      </section>
+      <section>
+        <pre><code>$ docker ps
+CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
+86414f5548dc        aa0           "apachectl -D FOREGR   36 seconds ago      Up 34 seconds</code></pre>
       </section>
       <section>
         <h2>Stopping a Background Container</h2>
@@ -532,15 +567,35 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
         <h1>Docker Compose</h1>
       </section>
       <section>
-        <pre><code>web:
-   build: .</code></pre>
+        <h2>Included with Docker</h2>
+        <p>No additional installation required</p>
+      </section>
+      <section>
+        <h2>Community Sourced</h2>
+        <p>Based on Docker Fig</p>
+      </section>
+      <section>
+        <h2>Compose Files</h2>
+        <code>docker-compose.yml</code>
+        <p>Descriptive, rather than instructive</p>
+      </section>
+      <section>
+
+      </section>
+      <section>
+        <pre><code>version: '2'
+services:
+    web:
+        build: .</code></pre>
       </section>
       <section>
         <h2>Overriding Dockerfiles</h2>
-        <pre><code>web:
-   build: .
-   ports:
-      - “80:80”</code></pre>
+        <pre><code>version: '2'
+services:
+    web:
+        build: .
+        ports:
+          - “80:80”</code></pre>
       </section>
       <section>
         <h2>"Up"ing a container</h2>
@@ -597,12 +652,14 @@ $ curl docker.dev
       </section>
       <section>
         <h2>Volumes</h2>
-        <pre><code>web:
-   build: .
-   ports:
-      - “80:80”
-   volumes:
-      - docroot:/var/www</code></pre>
+        <pre><code>version: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "80:80"
+        volumes:
+            - ./docroot:/var/www</code></pre>
       </section>
       <section>
         <h2>Directory Structure</h2>
@@ -626,16 +683,18 @@ $ curl docker.dev
         <p><code>image</code> directive</p>
       </section>
       <section>
-        <pre><code>web:
-   build: .docker/web
-   ports:
-      - "80:80"
-   volumes:
-      - docroot:/var/www
-db:
-   image: mysql
-   ports:
-      - 3306:3306</code></pre>
+        <pre><code>version: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "80:80"
+        volumes:
+            - ./docroot:/var/www
+    db:
+        image: mysql
+        ports:
+            - 3306:3306</code></pre>
       </section>
       <section>
         <pre><code>&lt;your_project_root&gt;
@@ -656,20 +715,23 @@ db:
       </section>
       <section>
         <h2>Environment Directive</h2>
-        <pre><code>web:
-   build: .docker/web
-   ports:
-      - "80:80"
-   volumes:
-      - docroot:/var/www
-db:
-   image: mysql
-   ports:
-      - 3306:3306
-   environment:
-      - MYSQL_DB=drupal8
-      - MYSQL_USER=drupal
-      - MYSQL_PASS=thisisawesome</code></pre>
+        <pre><code>wversion: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "80:80"
+        volumes:
+            - ./docroot:/var/www
+    db:
+        image: mysql
+        ports:
+            - 3306:3306
+        environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=drupal8
+          - MYSQL_USER=drupal
+          - MYSQL_PASSWORD=thisisawesome</code></pre>
       </section>
     </section>
 
