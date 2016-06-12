@@ -54,7 +54,7 @@ body {
 .reveal h6 {
     margin: 0 0 20px 0;
     color: #333;
-    font-family: "Avalon", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     font-weight: normal;
     line-height: 1.2;
     /*letter-spacing: 0em;*/
@@ -63,11 +63,11 @@ body {
 }
 
 .reveal h1 {
-    font-size: 3.77em;
+    font-size: 3.33em;
 }
 
 .reveal h2 {
-    font-size: 2.11em;
+    font-size: 2em;
 }
 
 .reveal h3 {
@@ -178,7 +178,7 @@ body {
     width: 90%;
     margin: 20px auto;
     text-align: left;
-    font-size: 0.6em;
+    font-size: 0.7em;
     font-family: "Share Tech Mono", monospace;
     line-height: 1.2em;
     word-wrap: break-word;

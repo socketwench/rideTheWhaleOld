@@ -124,6 +124,7 @@
       </section>
       <section>
         <h2>Wait, I need a VM?</h2>
+        <p class="fragment">Well....<span class="fragment">yes</span>.</p>
       </section>
       <section>
         <h2>Docker Machine</h2>
@@ -146,15 +147,11 @@
 
     <section>
       <section>
-        <h1>Your First Container</h1>
+        <h1>Just pull<br>and run</h1>
       </section>
       <section>
-        <h2>No, you don't need to install Linux</h2>
-      </section>
-      <section>
-        <h2>Pull command</h2>
-        <code>docker pull the_container_name</code>
-        <p class="fragment">Think: <code>git pull</code></p>
+        <h2>Docker works like Vagrant</h2>
+        <p>You <strong>rarely</strong> build a container from scratch</p>
       </section>
       <section>
         <h2>Docker Hub</h2>
@@ -162,35 +159,37 @@
         <p>https://hub.docker.com/</p>
       </section>
       <section>
+        <h2>Downloading from Hub</h2>
+        <code>docker pull the_container_name</code>
+        <p class="fragment">Think: <code>git pull</code></p>
+      </section>
+      <section>
+        <!--
+        @todo Make this into a sequence comic?
+        -->
         <h2>Anyone can upload to Hub!</h2>
         <p>Container "source files" uploaded.</p>
         <p>Hub "compiles" the container for use.</p>
       </section>
       <section>
         <h2>Official Debian Container</h2>
-        <pre><code>
-$ docker pull debian
-        </code></pre>
+        <pre><code>$ docker pull debian</code></pre>
         <p>Good starter for web projects.</p>
       </section>
       <section>
         <h2>Running a Container</h2>
-        <code>docker run</code>
+        <code>docker run <em>container_name</em> <em>command</em></code>
       </section>
       <section>
-        <pre><code>
-$ docker run -i -t debian /bin/bash
-        </code></pre>
+        <pre><code>$ docker run -i -t debian /bin/bash</code></pre>
       </section>
       <!--
       @todo Graphic breaking down each part of the run command.
       -->
       <section>
         <h2>Listing containers</h2>
-        <pre><code>
-$ docker ps
-CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
-        </code></pre>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS</code></pre>
       </section>
       <section>
         <h2>Waitaminute, "ps"?</h2>
@@ -205,17 +204,29 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
       -->
       <section>
         <h2>Listing all containers</h2>
-        <pre><code>
-$ docker ps -a
+        <pre><code>$ docker ps -a
 CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
-0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited
-        </code></pre>
+0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited</code></pre>
+      </section>
+      <section>
+        <!--
+        @todo Comic?
+        -->
+        <h2>That's...a lot to type in.</h2>
+        <p>Please tell me there's some way to automate this?</p>
       </section>
     </section>
 
     <section>
       <section>
-        <h1>Make a server in just one text file</h1>
+        <h1>A server in a text file</h1>
+      </section>
+      <section>
+        <h2>Ingredients</h2>
+        <p>The starting container</p>
+        <p>Who maintains this file</p>
+        <p>Other commands & config</p>
+        <p>What to run when ready</p>
       </section>
       <section>
         <h2>Dockerfiles</h2>
@@ -486,6 +497,9 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
 ENTRYPOINT [“apachectl”]</code></pre>
       </section>
       <section>
+        <!--
+        @todo Turn this into a sequence comic
+        -->
         <h2>When we ran the cotainer...</h2>
         <pre><code>$ docker run -i -t aa0 apachectl -D FOREGROUND</code></pre>
         <p>...did this in the container:</p>
