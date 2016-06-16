@@ -748,6 +748,153 @@ services:
           - MYSQL_PASSWORD=thisisawesome</code></pre>
       </section>
     </section>
+    <section>
+      <section>
+        <h1>CLI Containers</h1>
+      </section>
+      <section>
+        <pre><code>/home/tess/dockerthingy
+├── .docker
+│   ├── db
+│   ├── cli
+│   │   └── Dockerfile
+│   └── web
+│       └── Dockerfile
+├── docker-compose.yml
+└── docroot
+└── index.html</code></pre>
+      </section>
+      <section>
+        <pre><code>cli:
+  build: .docker/cli
+  links:
+  - db
+  - web</code></pre>
+      </section>
+      <section>
+<pre><code>volumes_from:
+  - web</code></pre>
+      </section>
+      <section>
+<pre><code>web:
+  build: .docker/web
+  ports:
+  - "80:80"
+  volumes:
+  - ./docroot:/var/www
+  links:
+  - db
+  db:
+  build: .docker/db
+  ports:
+  - 3306:3306
+  environment:
+  - MYSQL_DB=drupal8
+  - MYSQL_USER=drupal
+  - MYSQL_PASS=thisisawesome
+  cli:
+  build: .docker/cli
+  volumes_from:
+  - web
+  links:
+  - db
+  - web</code></pre>
+      </section>
+      <section>
+<pre><code>CONTAINER ID   COMMAND                STATUS       NAMES
+  245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1
+  ea7441c7d77c   dockerthingy_db        Up 18 secs   dockerthingy_db_1</code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Keeping containers running</h1>
+      </section>
+      <section>
+<pre><code>FROM debian:latest
+  MAINTAINER your_email@example.com
+
+  RUN apt-get update && \
+  apt-get -yq install supervisor
+
+  COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+  CMD ["/usr/bin/supervisord", "-n"]</code></pre>
+      </section>
+      <section>
+<pre><code>$ docker-compose build cli && docker-compose up -d</code></pre>
+      </section>
+      <section>
+<pre><code>CONTAINER ID   COMMAND                  STATUS       NAMES
+  bd129d8886ee   "/usr/bin/supervisord"   Up 17 secs   dockerthingy_cli_1
+  245fbb0bf255   "apachectl -D FOREGR     Up 53 mins   dockerthingy_web_1
+  ea7441c7d77c   dockerthingy_db          Up 53 mins   dockerthingy_db_1</code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Tasking into the CLI Container</h1>
+      </section>
+      <section>
+        <code>docker exec &lt;container_id&gt; &lt;command&gt;</code>
+      </section>
+      <section>
+<pre><code>$ docker exec -i -t bd129d8886ee bash -i
+  root@bd129d8886ee:/#
+
+  root@bd129d8886ee:/# ls /var/www/
+  index.html
+
+  root@bd129d8886ee:/# exit
+  $</code></pre>
+      </section>
+      <section>
+<pre><code>$ docker-compose ps
+  Name                  Command           State              Ports
+  -----------------------------------------------------------------------------------
+  dockerthingy_cli_1   /usr/bin/supervisord -n   Up
+  dockerthingy_db_1    /tmp/mysql_run.sh         Up      0.0.0.0:3306->3306/tcp
+  dockerthingy_web_1   apachectl -D FOREGROUND   Up      0.0.0.0:80->80/tcp, 9000/tcp</code></pre>
+      </section>
+      <section>
+<pre><code>$ docker-compose ps -q cli
+  bd129d8886eefb26494996a7d1163d5db2871a288b3695690b8362a4d1be7473
+</code></pre>
+      </section>
+      <section>
+<pre><code>$ docker exec -i -t $(docker-compose ps -q cli) bash -i
+  root@bd129d8886ee:/#</code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Helper Scripts</h1>
+      </section>
+      <section>
+<pre><code>#!/usr/bin/env bash
+
+  DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+  echo "Starting bash..."
+  docker exec -i -t $(cd $DIR && docker-compose ps -q cli) bash -i</code></pre>
+      </section>
+      <section>
+<pre><code>/home/tess/dockerthingy
+  ├── docker-compose.yml
+  ├── docroot
+  │   └── index.html
+  └── scripts
+  └── docker-bash.sh</code></pre>
+      </section>
+      <section>
+<pre><code>#!/usr/bin/env bash
+  docker kill $(docker ps -q)
+  docker rm $(docker ps -qa)
+  docker rmi $(docker images -q)</code></pre>
+      </section>
+    </section>
 
   </div>
 </div>
