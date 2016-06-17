@@ -28,7 +28,7 @@
     <section>
       <h1>Ride the Whale!</h1>
       <h2>Docker for Drupalists</h2>
-      <img src="images/controls.png" />
+      <img src="images/controls.png"/>
     </section>
 
     <section>
@@ -75,8 +75,7 @@
 
     <section>
       <section>
-        <h1>"I just want to code!"</h1>
-        <h2>"Not argue with MAMP."</h2>
+        <h1>"What's wrong with MAMP?"</h1>
       </section>
       <section>
         <h2>Problem #1</h2>
@@ -116,6 +115,11 @@
         <h2>Baked-in Build Automation</h2>
         <p>No need to install anything else.</p>
       </section>
+      <section>
+        <h2>Built on Linux</h2>
+        <p>Enterprise ready tech</p>
+        <p>Maintained by Red Hat, Google, IBM and others</p>
+      </section>
     </section>
 
     <section>
@@ -123,16 +127,29 @@
         <h1>Getting Docker</h1>
       </section>
       <section>
-        <h2>Wait, I need a VM?</h2>
-        <p class="fragment">Well....<span class="fragment">yes</span>.</p>
-      </section>
-      <section>
-        <h2>Docker Machine</h2>
+        <h2>Do I need to pay for it?</h2>
+        <p>Docker is free and open source!</p>
+        <p>https://github.com/docker/docker</p>
       </section>
       <section>
         <h2>Docker Toolbox</h2>
         <p>Easiest way to install on Mac and Windows</p>
+      </section>
+      <section>
+        <h2>Installing Toolbox</h2>
         <p>https://www.docker.com/products/docker-toolbox</p>
+        <p>Includes Virtualbox</p>
+      </section>
+      <section>
+        <img src="images/waitINeedAVM.png"/>
+      </section>
+      <!--
+      @todo graphic explaining how docker relies on the Linux kernel
+      -->
+      <section>
+        <h2>Docker Machine</h2>
+        <p>Provides a Docker Host on a VM</p>
+        <p class="fragment">Replaces boot2docker</p>
       </section>
       <section>
         <h2>Docker On Linux</h2>
@@ -172,28 +189,63 @@
         <p>Hub "compiles" the container for use.</p>
       </section>
       <section>
-        <h2>Official Debian Container</h2>
+        <h2>Official containers</h2>
+        <p>Vetted and regularly updated</p>
+        <p>MySQL, PHP, Apache, many Linux Distros</p>
+      </section>
+      <section>
+        <h2>Official Drupal Container</h2>
+        <p class="fragment">Good for demos...</p>
+        <p class="fragment">...but limited for development</p>
+      </section>
+      <section>
+        <h2>Downloading a Container</h2>
+        <pre><code>$ docker pull &lt;image_name&gt;</code></pre>
+        <p>Where <code>image_name</code> is the name on Docker Hub</p>
+      </section>
+      <section>
+        <h2>Getting started</h2>
         <pre><code>$ docker pull debian</code></pre>
-        <p>Good starter for web projects.</p>
       </section>
       <section>
         <h2>Running a Container</h2>
-        <code>docker run <em>container_name</em> <em>command</em></code>
+        <code>docker run <em>image_name</em> <em>command</em></code>
       </section>
-      <section>
-        <pre><code>$ docker run -i -t debian /bin/bash</code></pre>
+      <section data-transition="none">
+        <img src="images/dockerRun1.png" />
       </section>
-      <!--
-      @todo Graphic breaking down each part of the run command.
-      -->
-      <section>
+      <section data-transition="none">
+        <img src="images/dockerRun2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun5.png" />
+      </section>
+      <section data-transition="none" data-background="images/dockerPS1.png" data-background-size="contain" data-background-transition="none">
         <h2>Listing containers</h2>
         <pre><code>$ docker ps
-CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS</code></pre>
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
       </section>
-      <section>
-        <h2>Waitaminute, "ps"?</h2>
-        <p>Like the UNIX "ps" command?</p>
+      <section data-transition="none" data-background="images/dockerPS2.png" data-background-size="contain" data-background-transition="none">
+        <h2>Listing containers</h2>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section data-transition="none" data-background="images/dockerPS3.png" data-background-size="contain" data-background-transition="none">
+        <h2>Listing containers</h2>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
       </section>
       <section>
         <h2>"A container is just a process."</h2>
@@ -209,11 +261,7 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
 0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited</code></pre>
       </section>
       <section>
-        <!--
-        @todo Comic?
-        -->
-        <h2>That's...a lot to type in.</h2>
-        <p>Please tell me there's some way to automate this?</p>
+        <img src="images/butHowDoICustomizeAndShare.png" />
       </section>
     </section>
 
@@ -519,7 +567,7 @@ ENTRYPOINT ["apachectl"]</code></pre>
       <section>
         <h2>Updating an existing container</h2>
         <code>
-docker build <strong>&lt;your_container_id&gt;</strong>
+          docker build <strong>&lt;your_container_id&gt;</strong>
         </code>
       </section>
       <section>
@@ -555,6 +603,15 @@ Successfully built 72b3cac68438</code></pre>
 $ docker ps
 CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
 988bf0c8cdfd        72b           "apachectl -D FOREGR   4 seconds ago       Up 3 seconds</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay3.png" />
       </section>
     </section>
 
@@ -823,7 +880,7 @@ services:
   CMD ["/usr/bin/supervisord", "-n"]</code></pre>
       </section>
       <section>
-<pre><code>$ docker-compose build cli && docker-compose up -d</code></pre>
+        <pre><code>$ docker-compose build cli && docker-compose up -d</code></pre>
       </section>
       <section>
 <pre><code>CONTAINER ID   COMMAND                  STATUS       NAMES
