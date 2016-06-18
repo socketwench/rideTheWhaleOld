@@ -341,7 +341,7 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
 
     <section>
       <section>
-        <h1>A server in a text file</h1>
+        <h1>A server in<br />a text file</h1>
       </section>
       <section>
         <h2>Ingredients</h2>
@@ -359,18 +359,37 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
         <code>DIRECTIVE parameter</code>
         <p class="fragment">https://docs.docker.com/</p>
       </section>
-      <section>
+      <section data-transition="none" data-background="images/from1.png" data-background-size="contain" data-background-transition="none">
         <h2>The first two directives</h2>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section data-transition="none" data-background="images/from2.png" data-background-size="contain" data-background-transition="none">
+        <h2>The first two directives</h2>
+        <pre><code>FROM debian:wheezy
+MAINTAINER your_email@example.com</code></pre>
+        <p>&nbsp;</p>
       </section>
       <section>
         <h2>Turtles all the way down</h2>
-        <p>All containers are build on top of another container</p>
+        <p class="fragment">All containers are build on top of another container</p>
       </section>
-      <!--
-      @todo Stack graphic showing container image inheritance.
-      -->
+      <section data-transition="none">
+        <img src="images/turtles1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles5.png" />
+      </section>
       <section>
         <h2>"scratch" container</h2>
         <p>Parent of all Docker containers.</p>
@@ -379,7 +398,7 @@ MAINTAINER your_email@example.com</code></pre>
       <section>
         <h2>FROM directive</h2>
         <code>FROM name:version</code>
-        <p>Version is optional, defaults to "latest"</p>
+        <p class="fragment">Version is optional, defaults to "latest"</p>
       </section>
       <section>
         <h2>Using your Dockerfile</h2>
@@ -387,26 +406,26 @@ MAINTAINER your_email@example.com</code></pre>
       </section>
       <section>
         <pre><code>$ docker build .
+
 Sending build context to Docker daemon 2.048 kB
-Sending build context to Docker daemon
-Step 0 : FROM debian:wheezy
- ---> 60c52dbe9d91
-Step 1 : MAINTAINER your_email@example.com
- ---> Running in 486f3a2255b4
- ---> 64b0d7e8eef9
-Removing intermediate container 486f3a2255b4
-Successfully built 64b0d7e8eef9</code></pre>
-      </section>
-      <section>
-        <h2>Is it running?</h2>
-        <pre class="fragment"><code>$ docker ps -q
+Step 1 : FROM debian:wheezy
+ ---> 4c82789231a5
+Step 2 : MAINTAINER your_email@example.com
+ ---> Running in 908f461e93e4
+ ---> c9c74cdf1e1d
+Removing intermediate container 908f461e93e4
+Successfully built c9c74cdf1e1d
+
 $</code></pre>
-        <p><code>-q</code> switch = list only container IDs.</p>
       </section>
-      <section>
-        <h2>Nothing! What the heck!?</h2>
-        <p>It built "successfully" but nothing is running.</p>
-        <p>"Removing intermediate container" is a hint.</p>
+      <section data-transition="none">
+        <img src="images/nothing1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nothing2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nothing3.png" />
       </section>
     </section>
 
