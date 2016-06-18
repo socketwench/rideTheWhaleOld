@@ -197,14 +197,35 @@
 
     <section>
       <section>
-        <h1>Just pull<br>and run</h1>
+        <h1>Quick, pull,<br>and run</h1>
+      </section>
+      <section>
+        <img src="images/quickstartTerminal.png" />
+        <p>Starts default docker machine</p>
+        <p>Sets <code>$DOCKER_HOST</code> environment variable</p>
+      </section>
+      <section>
+        <img src="images/quickstartScreencap.png">
+      </section>
+      <section>
+        <h2>Without Quickstart</h2>
+        <p>In ~/.bashrc</p>
+<pre><code>docker-machine start default
+eval $(docker-machine env default)</code></pre>
+        <p class="fragment">May slow down terminal startup</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/nowICanRunContainers1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nowICanRunContainers2.png" />
       </section>
       <section>
         <h2>Docker works like Vagrant</h2>
         <p>You <strong>rarely</strong> build a container from scratch</p>
       </section>
       <section>
-        <h2>Docker Hub</h2>
+        <img src="images/dockerHub.png" alt="Docker Hub icon">
         <p>Online registry of pre-made containers</p>
         <p>https://hub.docker.com/</p>
       </section>
@@ -322,7 +343,7 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
         <p>What to run when ready</p>
       </section>
       <section>
-        <h2>Dockerfiles</h2>
+        <img src="images/dockerfile.png" alt="Dockerfile icon">
         <p>Basis of Docker's build system</p>
       </section>
       <section>

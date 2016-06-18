@@ -454,7 +454,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="643.24111"
+     inkscape:cx="308.7796"
      inkscape:cy="298.08515"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -477,7 +477,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -1146,6 +1146,41 @@
            id="path3677-2-1"
            style="fill:none;stroke:#000000;stroke-width:25400;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            d="M -0.09891963,0.06139819 110686.9,1.057128"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="translate(267.60025,-476.75851)"
+       style="display:inline"
+       id="g5873">
+      <g
+         transform="matrix(1.5046804e-4,0,0,1.5147594e-4,601.35322,586.05615)"
+         id="g3613"
+         style="stroke:#000000;stroke-opacity:1">
+        <path
+           id="path3615"
+           style="fill:none;stroke:#000000;stroke-width:25400;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           d="M 66341.04,0.07647705 C 102979.9,0.07647705 132682,10453.7 132682,23349.04"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         transform="matrix(-1.5046804e-4,0,0,1.5147594e-4,611.33543,586.05615)"
+         id="g3617"
+         style="stroke:#000000;stroke-opacity:1">
+        <path
+           id="path3619"
+           style="fill:none;stroke:#000000;stroke-width:25400;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           d="M 66340.87,0.07647705 C 102979.7,0.07647705 132681.8,10453.7 132681.8,23349.04"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         transform="matrix(1.5046804e-4,0,0,1.5147594e-4,592.32153,586.74523)"
+         id="g3621"
+         style="stroke:#000000;stroke-opacity:1">
+        <path
+           id="path3623"
+           style="fill:none;stroke:#000000;stroke-width:25400;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           d="M 150183,114932.9 C 131313.6,154880.7 84137.39,171726.4 44811.88,152558.7 30081.77,145379.3 17905.77,133736 9962.07,119233.2"
            inkscape:connector-curvature="0" />
       </g>
     </g>
