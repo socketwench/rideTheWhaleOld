@@ -14,7 +14,7 @@ Docker is an alternative to local environments like Dev Desktop and heavy, resou
 automation built in. In this session we'll get inside Docker, and create a custom server environment step by step for
 your Drupal project!
 
-Based on my blog series: http://deninet.com/tags/docker-scratch
+Based on the blog series: http://deninet.com/tags/docker-scratch
 
 ## Viewing and Navigation
 
