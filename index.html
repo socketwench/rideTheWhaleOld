@@ -445,11 +445,44 @@ $</code></pre>
         <h2>It's not just where you're FROM</h2>
         <p>Each line in the Dockerfile is like a commit.</p>
       </section>
-      <!--
-      @todo Graphic correlating lines in the Dockerfile to different overlaid images
-      -->
+      <section data-transition="none">
+        <img src="images/build1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build6.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build7.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build8.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build9.png" />
+      </section>
       <section>
-        <p>Listing images</p>
+        <h2>You can't <code>run</code> an image</h2>
+        <p class="fragment">Running an image creates a new container!</p>
+      </section>
+      <section>
+        <h2>Container data is ephemeral</h2>
+        <p class="fragment">Exists as long as container exists.</p>
+        <p class="fragment">Must be <code>commit</code>ed to an image.</p>
+      </section>
+      <section>
+        <h2>Listing images</h2>
         <pre><code>$ docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
                         64b0d7e8eef9   1 minutes ago     85.02 MB
@@ -458,9 +491,8 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       </section>
       <section>
         <h2>Intermediate containers?</h2>
-      </section>
-      <section>
-        <h2>Containers vs Images</h2>
+        <p class="fragment">We didn't need it any longer.</p>
+        <p class="fragment">So we threw them away.</p>
       </section>
       <section>
         <h2>Base image</h2>
@@ -468,8 +500,8 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
         <p>Usually whatever image you start with</p>
       </section>
       <section>
-        <h2>Running a container</h2>
-        <code>docker run c0nt41n3rHa5h /path/to/command</code>
+        <h2>Running an image</h2>
+        <code>docker run <em>imagehash</em> <em>/path/to/command</em></code>
       </section>
       <section>
         <pre><code>$ docker run -i -t 64b /bin/bash</code></pre>
@@ -499,10 +531,11 @@ Debian GNU/Linux 7 \n \l</code></pre>
       </section>
       <section>
         <h2>RUN directive</h2>
-        <code>RUN some_command -with arguments</code>
+        <code>RUN <em>some_command -with arguments</em></code>
         <p>Runs the specified command in the container</p>
       </section>
       <section>
+        <h2>Installing Apache</h2>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com
 
@@ -536,6 +569,11 @@ Setting up libswitch-perl (2.16-2) ...
  ---> aa084388ac30
 Removing intermediate container ef474ef3a976
 Successfully built aa084388ac30</code></pre>
+        <small>(scroll down for more)</small>
+      </section>
+      <section>
+        <h2>Updating our image</h2>
+        <p class="fragment">Just use <code>docker build</code>!</p>
       </section>
       <section>
         <pre><code>$docker images
