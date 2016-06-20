@@ -804,11 +804,11 @@ ENTRYPOINT [“apachectl”]</code></pre>
       </section>
       <section>
         <h2>Our Dockerfile so far</h2>
-        <pre><code>FROM debian:wheezy
+        <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com
 
 RUN apt-get update
-RUN apt-get install -y apache2
+RUN apt-get install -yq apache2
 
 CMD ["-D", "FOREGROUND"]
 ENTRYPOINT ["apachectl"]</code></pre>
@@ -824,7 +824,7 @@ ENTRYPOINT ["apachectl"]</code></pre>
 
 Sending build context to Docker daemon 2.048 kB
 Sending build context to Docker daemon
-Step 0 : FROM debian:wheezy
+Step 0 : FROM debian:latest
  ---> 60c52dbe9d91
 Step 1 : MAINTAINER your_email@example.com
  ---> Using cache
@@ -855,6 +855,65 @@ $ docker ps
 CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
 988bf0c8cdfd        72b           "apachectl -D FOREGR   4 seconds ago       Up 3 seconds</code></pre>
       </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>There's no place like 127.0.0.1</h1>
+      </section>
+      <section>
+        <h2>Opening Ports</h2>
+        <code>EXPOSE <em>port_number</em></code>
+        <p class="fragment">Typically the third-to-last line in your Dockerfile</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin2.png">
+      </section>
+      <section>
+        <h2>Getting the Machine IP</h2>
+        <pre><code>$ docker-machine ip
+192.168.59.103</code></pre>
+      </section>
+      <section>
+        <h2>/etc/hosts</h2>
+        <pre><code>192.168.59.103	docker.dev</code></pre>
+        <p class="fragment">Machine IP may change on restart!</p>
+      </section>
+      <section>
+        <h2><code>EXPOSE</code> alone isn't Enough</h2>
+        <p>Contains must be <code>run</code> with a port mapping!</p>
+      </section>
+      <section>
+        <h2>Mapping Ports on <code>run</code></h2>
+        <code>docker run -d -p <em>x</em>:<em>y</em> <em>your_image_id</em></code>
+        <p class="fragment"><code>x</code> is the port on your machine</p>
+        <p class="fragment"><code>y</code> is the port in the container</p>
+      </section>
+      <section>
+        <pre><code>$ docker run -d -p 80:80 802
+2f4126401306277841aa173794e17703caaa38c8a30709747e4bd0577ba3a44d</code></pre>
+      </section>
+      <section>
+        <img src="images/itWorks.png">
+      </section>
       <section data-transition="none">
         <img src="images/theresGotToBeABetterWay1.png" />
       </section>
@@ -863,24 +922,6 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
       </section>
       <section data-transition="none">
         <img src="images/theresGotToBeABetterWay3.png" />
-      </section>
-    </section>
-
-    <section>
-      <section>
-        <h1>There's no place like 127.0.0.1</h1>
-      </section>
-      <section>
-        <pre><code>$ docker-machine ip
-192.168.59.103</code></pre>
-      </section>
-      <section>
-        <h2>/etc/hosts</h2>
-        <pre><code>192.168.59.103	docker.dev</code></pre>
-      </section>
-      <section>
-        <h2>Exposing Ports</h2>
-        <pre><code>EXPOSE 80</code></pre>
       </section>
     </section>
 
