@@ -765,22 +765,42 @@ $</code></pre>
         <h1>Default Run Commands</h1>
       </section>
       <section>
-        <h2>Default Command</h2>
+        <h2>CMD Directive</h2>
         <pre><code>CMD [“apachectl”, “-D”, “FOREGROUND”]</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints6.png" />
+      </section>
+      <section>
+        <h2>Entrypoint</h2>
+        <p>Actual executable run in container</p>
+        <p class="fragment"><code>docker run</code> command passed as a parameter</p>
+      </section>
+      <section>
+        <h2>Default Entrypoint</h2>
+        <code>/bin/sh -c <em>/your/run/command</em></code>
+        <p class="fragment">May be overridden by your base image!</p>
       </section>
       <section>
         <h2>Specifying an entrypoint</h2>
         <pre><code>CMD [“-D”, “FOREGROUND”]
 ENTRYPOINT [“apachectl”]</code></pre>
-      </section>
-      <section>
-        <!--
-        @todo Turn this into a sequence comic
-        -->
-        <h2>When we ran the cotainer...</h2>
-        <pre><code>$ docker run -i -t aa0 apachectl -D FOREGROUND</code></pre>
-        <p>...did this in the container:</p>
-        <pre><code>$ /bin/sh -c “apachectl -D FOREGROUND”</code></pre>
+        <p class="fragment">Use <Code>CMD</Code> to pass parameters</p>
       </section>
       <section>
         <h2>Our Dockerfile so far</h2>
@@ -796,7 +816,7 @@ ENTRYPOINT ["apachectl"]</code></pre>
       <section>
         <h2>Updating an existing container</h2>
         <code>
-          docker build <strong>&lt;your_container_id&gt;</strong>
+          docker build <em>your_container_id</em>
         </code>
       </section>
       <section>
@@ -824,8 +844,10 @@ Step 5 : ENTRYPOINT apachectl
  ---> 72b3cac68438
 Removing intermediate container 6ac785739695
 Successfully built 72b3cac68438</code></pre>
+        <small class="fragment">(Scroll down for more.)</small>
       </section>
       <section>
+        <h2>Look, Ma, no run command!</h2>
         <pre><code>$ docker run -d 72b
 988bf0c8cdfdf88c42e3673a65597f78693c07b14070cd535962b13b36884560
 
@@ -878,9 +900,6 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
         <h2>Compose Files</h2>
         <code>docker-compose.yml</code>
         <p>Descriptive, rather than instructive</p>
-      </section>
-      <section>
-
       </section>
       <section>
         <pre><code>version: '2'
