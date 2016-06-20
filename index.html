@@ -193,6 +193,11 @@
         <h2>Installing on Linux</h2>
         <p>Use your distro's package manager</p>
       </section>
+      <section>
+        <h2>Soon, No more Virtualbox!</h2>
+        <p>Docker for Mac & Windows Beta</p>
+        <p><a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">https://blog.docker.com/2016/06/docker-mac-windows-public-beta/</a></p>
+      </section>
     </section>
 
     <section>
@@ -437,9 +442,39 @@ $</code></pre>
         <h2>VMs are like Pudding</h2>
         <p>It's one big blob of stuff.</p>
       </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk5.png">
+      </section>
       <section>
         <h2>Containers are like Cake</h2>
         <p>They have layers!</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk6.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk7.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk8.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk9.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk10.png">
       </section>
       <section>
         <h2>It's not just where you're FROM</h2>
@@ -473,6 +508,30 @@ $</code></pre>
         <img src="images/build9.png" />
       </section>
       <section>
+        <pre><code>$ docker build .
+
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM debian:wheezy
+ ---> 4c82789231a5
+Step 2 : MAINTAINER your_email@example.com
+ ---> Running in 908f461e93e4
+ ---> c9c74cdf1e1d
+Removing intermediate container 908f461e93e4
+Successfully built c9c74cdf1e1d
+
+$</code></pre>
+      </section>
+      <section>
+        <h2>Image History</h2>
+        <pre><code>$ docker history c9c74cdf1e1d
+
+IMAGE          CREATED        CREATED BY                                      SIZE                COMMENT
+c9c74cdf1e1d   42 hours ago   /bin/sh -c #(nop) MAINTAINER your_email@examp   0 B
+4c82789231a5   10 days ago    /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
+&lt;missing&gt;      10 days ago    /bin/sh -c #(nop) ADD file:add5fc8cb18678647f   84.93 MB</code></pre>
+        <p class="fragment">(You'll almost never need this.)</p>
+      </section>
+      <section>
         <h2>You can't <code>run</code> an image</h2>
         <p class="fragment">Running an image creates a new container!</p>
       </section>
@@ -500,11 +559,11 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
         <p>Usually whatever image you start with</p>
       </section>
       <section>
-        <h2>Running an image</h2>
+        <h2>Starting a Container from an Image</h2>
         <code>docker run <em>imagehash</em> <em>/path/to/command</em></code>
       </section>
       <section data-background="images/nowWereIn.png" data-background-size="contain">
-        <pre><code>$ docker run -i -t 64b /bin/bash
+        <pre><code>$ docker run -i -t c9c /bin/bash
 root@71724ddf264b:/# cat /etc/issue
 Debian GNU/Linux 7 \n \l</code></pre>
         <p>&nbsp;</p>
@@ -518,13 +577,27 @@ Debian GNU/Linux 7 \n \l</code></pre>
       </section>
       <section>
         <h2>No INSTALL directive</h2>
-        <p>It lets the container decide!</p>
+        <p class="fragment">It lets the container decide!</p>
       </section>
-      <section>
+      <section data-background="images/noInstallDirective1.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Base image decides the tool</h2>
+        <p class="fragment">Debian and Ubuntu use <code>apt-get</code></p>
+        <p class="fragment">Cent OS uses <code>yum</code></p>
+      </section>
+      <section data-background="images/noInstallDirective2.png" data-background-size="contain" data-background-transition="none" data-transition="none">
         <h2>Base image decides the tool</h2>
         <p>Debian and Ubuntu use <code>apt-get</code></p>
-        <p>Red Hat uses <code>yum</code></p>
-        <p>Arch uses <code>pacman</code></p>
+        <p>Cent OS uses <code>yum</code></p>
+      </section>
+      <section data-background="images/noInstallDirective3.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Base image decides the tool</h2>
+        <p>Debian and Ubuntu use <code>apt-get</code></p>
+        <p>Cent OS uses <code>yum</code></p>
+      </section>
+      <section>
+        <h2>RUN directive</h2>
+        <code>RUN <em>some_command -with arguments</em></code>
+        <p>Runs the specified command in the container</p>
       </section>
       <section>
         <img src="images/thatMeansAnyLinuxTutWorksInDocker.png" />
@@ -534,21 +607,16 @@ Debian GNU/Linux 7 \n \l</code></pre>
         <p><a href="https://www.linode.com/docs/websites/lamp/">https://www.linode.com/docs/websites/lamp/</a></p>
       </section>
       <section>
-        <h2>Keywords</h2>
-        <p>"headless", "scripted", or "unattended installation"</p>
-      </section>
-      <section>
-        <h2>RUN directive</h2>
-        <code>RUN <em>some_command -with arguments</em></code>
-        <p>Runs the specified command in the container</p>
-      </section>
-      <section>
         <h2>Installing Apache</h2>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com
 
 RUN apt-get update
 RUN apt-get install -y apache2</code></pre>
+      </section>
+      <section>
+        <h2>Updating our image</h2>
+        <p class="fragment">Just use <code>docker build</code>!</p>
       </section>
       <section>
         <pre><code>$ docker build .
@@ -579,10 +647,6 @@ Removing intermediate container ef474ef3a976
 Successfully built aa084388ac30</code></pre>
         <small>(scroll down for more)</small>
       </section>
-      <section>
-        <h2>Updating our image</h2>
-        <p class="fragment">Just use <code>docker build</code>!</p>
-      </section>
       <section data-background-size="contain" data-background-image="images/newImageID.png">
         <pre><code>$docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
@@ -591,7 +655,13 @@ debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       </section>
       <section>
-        <h2>Union FS</h2>
+        <h2><code>RUN</code> isn't interactive</h2>
+        <p>Software can require input on installation</p>
+        <p class="fragment">Will cause <code>docker build</code> to hang or fail</p>
+      </section>
+      <section>
+        <h2>Keywords</h2>
+        <p>"headless", "scripted", or "unattended installation"</p>
       </section>
     </section>
 
@@ -640,17 +710,11 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
 apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName
 
 $</code></pre>
-      </section>
-      <section>
-        <h2>Listing all containers</h2>
-        <pre><code>$ docker ps -a
+        <pre class="fragment"><code>$ docker ps -a
 CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
 9d0eab0934fe    aa0        "apachectl start"    2 minutes ago       Exited (0) 2 minutes ago</code></pre>
       </section>
       <section>
-        <!--
-        @TODO Comic anthropromorphizing apachectl?
-        -->
         <h2>Why'd it stop?</h2>
         <p class="fragment">apachectl started apache as a background process</p>
         <p class="fragment">Then returned "0"</p>
@@ -673,6 +737,7 @@ CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
         <h2>Getting what we want</h2>
         <pre><code>$ docker run -d aa0 apachectl -D FOREGROUND
 86414f5548dcecb83d80dec4ec9351a7697b23d11664738f8668167a127ec70e</code></pre>
+        <p class="fragment">In a new terminal session:</p>
         <pre class="fragment"><code>$ docker ps
 CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
 86414f5548dc        aa0           "apachectl -D FOREGR   36 seconds ago      Up 34 seconds</code></pre>
