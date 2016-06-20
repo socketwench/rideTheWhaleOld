@@ -503,12 +503,12 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
         <h2>Running an image</h2>
         <code>docker run <em>imagehash</em> <em>/path/to/command</em></code>
       </section>
-      <section>
-        <pre><code>$ docker run -i -t 64b /bin/bash</code></pre>
-      </section>
-      <section>
-        <pre><code>root@71724ddf264b:/# cat /etc/issue
+      <section data-background="images/nowWereIn.png" data-background-size="contain">
+        <pre><code>$ docker run -i -t 64b /bin/bash
+root@71724ddf264b:/# cat /etc/issue
 Debian GNU/Linux 7 \n \l</code></pre>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
       </section>
     </section>
 
@@ -520,14 +520,22 @@ Debian GNU/Linux 7 \n \l</code></pre>
         <h2>No INSTALL directive</h2>
         <p>It lets the container decide!</p>
       </section>
-      <!--
-      @TODO THIS. IS. LINUX!!!!!!11?1!
-      -->
       <section>
         <h2>Base image decides the tool</h2>
         <p>Debian and Ubuntu use <code>apt-get</code></p>
         <p>Red Hat uses <code>yum</code></p>
         <p>Arch uses <code>pacman</code></p>
+      </section>
+      <section>
+        <img src="images/thatMeansAnyLinuxTutWorksInDocker.png" />
+      </section>
+      <section>
+        <h2>LAMP Tutorials</h2>
+        <p><a href="https://www.linode.com/docs/websites/lamp/">https://www.linode.com/docs/websites/lamp/</a></p>
+      </section>
+      <section>
+        <h2>Keywords</h2>
+        <p>"headless", "scripted", or "unattended installation"</p>
       </section>
       <section>
         <h2>RUN directive</h2>
@@ -575,16 +583,12 @@ Successfully built aa084388ac30</code></pre>
         <h2>Updating our image</h2>
         <p class="fragment">Just use <code>docker build</code>!</p>
       </section>
-      <section>
+      <section data-background-size="contain" data-background-image="images/newImageID.png">
         <pre><code>$docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
                         aa084388ac30   2 minutes ago     145 MB
 debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
-      </section>
-      <section>
-        <h2>Where'd our image go!?</h2>
-        <p>docker build replaced our old image</p>
       </section>
       <section>
         <h2>Union FS</h2>
@@ -593,25 +597,52 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
 
     <section>
       <section>
-        <h1>Background Containers</h1>
+        <h1>Foreground processes,<br>background containers</h1>
       </section>
-      <section>
-        <h2>Build vs Run Phase</h2>
-      </section>
-      <section>
-        <pre><code>$ docker run -i -t aa0 /bin/bash</code></pre>
-      </section>
-      <section>
+      <section data-background="images/justAddARunRight1.png" data-background-size="contain" data-background-transition="none" data-transition="none">
         <h2>Starting Apache</h2>
-        <pre><code>
-$ apachectl start
-        </code></pre>
+        <p><code>apachectl</code> command</p>
+      </section>
+      <section data-background="images/justAddARunRight2.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Starting Apache</h2>
+        <p><code>apachectl</code> command</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun5.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun6.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun7.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun8.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun9.png">
       </section>
       <section>
+        <h2>As a run command?</h2>
         <pre><code>$ docker run -i -t aa0 apachectl start
-apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName</code></pre>
+apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName
+
+$</code></pre>
       </section>
       <section>
+        <h2>Listing all containers</h2>
         <pre><code>$ docker ps -a
 CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
 9d0eab0934fe    aa0        "apachectl start"    2 minutes ago       Exited (0) 2 minutes ago</code></pre>
@@ -621,8 +652,8 @@ CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
         @TODO Comic anthropromorphizing apachectl?
         -->
         <h2>Why'd it stop?</h2>
-        <p>apachectl started apache as a background process</p>
-        <p>Then returned "0"</p>
+        <p class="fragment">apachectl started apache as a background process</p>
+        <p class="fragment">Then returned "0"</p>
       </section>
       <section>
         <h2>Remember</h2>
@@ -630,16 +661,8 @@ CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
       </section>
       <section>
         <h2>Running Apache in the Foreground</h2>
-        <code>-D FOREGROUND</code>
-        <p>Apache switch, not Docker</p>
-      </section>
-      <section>
-        <pre><code>$ docker run -i -t aa0 apachectl -D FOREGROUND</code></pre>
-      </section>
-      <section>
-        <pre><code>$ docker ps
-CONTAINER ID     IMAGE    COMMAND                CREATED             STATUS
-059950c67e5b     aa0      "apachectl -D FOREGR   About a minute ago   Up About a minute</code></pre>
+        <code>apachectl -D FOREGROUND</code>
+        <p class="fragment">Apache switch, not Docker</p>
       </section>
       <section>
         <h2>Running a container in the background</h2>
@@ -647,24 +670,28 @@ CONTAINER ID     IMAGE    COMMAND                CREATED             STATUS
         <p>'d' for 'daemon'</p>
       </section>
       <section>
+        <h2>Getting what we want</h2>
         <pre><code>$ docker run -d aa0 apachectl -D FOREGROUND
 86414f5548dcecb83d80dec4ec9351a7697b23d11664738f8668167a127ec70e</code></pre>
-      </section>
-      <section>
-        <pre><code>$ docker ps
+        <pre class="fragment"><code>$ docker ps
 CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
 86414f5548dc        aa0           "apachectl -D FOREGR   36 seconds ago      Up 34 seconds</code></pre>
       </section>
       <section>
+        <img src="images/finally.png" />
+      </section>
+      <section>
         <h2>Stopping a Background Container</h2>
         <pre><code>$ docker kill 864
-864</code></pre>
+864
+
+$</code></pre>
       </section>
     </section>
 
     <section>
       <section>
-        <h1>Entrypoints</h1>
+        <h1>Default Run Commands</h1>
       </section>
       <section>
         <h2>Default Command</h2>
@@ -751,7 +778,7 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
         <h1>There's no place like 127.0.0.1</h1>
       </section>
       <section>
-        <pre><code>$ boot2docker ip
+        <pre><code>$ docker-machine ip
 192.168.59.103</code></pre>
       </section>
       <section>
