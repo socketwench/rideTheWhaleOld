@@ -803,6 +803,11 @@ ENTRYPOINT [“apachectl”]</code></pre>
         <p class="fragment">Use <Code>CMD</Code> to pass parameters</p>
       </section>
       <section>
+        <h2>Custom Entrypoints</h2>
+        <p>The <code>ENTRYPOINT</code> can be any command, even a script!</p>
+        <p class="fragment">Avoid too much automation in your containers</p>
+      </section>
+      <section>
         <h2>Our Dockerfile so far</h2>
         <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com
