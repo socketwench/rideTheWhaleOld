@@ -984,7 +984,9 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
         <p class="fragment"><code>-d</code> for <strong>d</strong>aemon</p>
       </section>
       <section data-background="images/containerName1.png" data-background-transition="none" data-background-size="contain" data-transition="none">
-        <pre><code>$ docker-compose up -d
+        <pre><code>$ cd /your/project/directory
+
+$ docker-compose up -d
 Creating dockerthingy_web_1
 
 $ docker ps
@@ -992,7 +994,9 @@ CONTAINER ID   COMMAND                STATUS       NAMES
 245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
       </section>
       <section data-background="images/containerName2.png" data-background-transition="none" data-background-size="contain" data-transition="none">
-        <pre><code>$ docker-compose up -d
+        <pre><code>$ cd /your/project/directory
+
+$ docker-compose up -d
 Creating dockerthingy_web_1
 
 $ docker ps
@@ -1014,20 +1018,47 @@ Name                 Command                   State   Ports
 dockerthingy_web_1   apachectl -D FOREGROUND   Up      80/tcp, 9000/tcp</code></pre>
       </section>
       <section>
-        <h2>Stopping & deleting</h2>
-        <pre><code>$ docker-compose kill
-$ docker-compose rm</code></pre>
-        <p class="fragment">Acts only on containers in docker-compose.yml.</p>
-      </section>
-      <section>
         <h2>Overriding Dockerfiles</h2>
 <pre><code>version: '2'
+  services:
+    web:
+      build: .
+      ports:
+        - “80:80”</code></pre>
+        <p class="fragment">Compose always overrides Dockerfiles</p>
+      </section>
+      <section>
+        <h2>Adding Containers from Hub</h2>
+        <code>image: <em>name_on_hub</em></code>
+        <p class="fragment">Use it instead of <code>build</code></p>
+      </section>
+      <section>
+        <h2>Database container</h2>
+        <pre><code>version: '2'
 services:
   web:
     build: .
     ports:
-      - “80:80”</code></pre>
-        <p class="fragment">Compose always overrides Dockerfiles</p>
+      - "80:80"
+  db:
+    image: mysql
+      ports:
+       - "3306:3306"</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa3.png" />
+      </section>
+      <section>
+        <h2>Stopping & deleting</h2>
+        <pre><code>$ docker-compose kill
+$ docker-compose rm</code></pre>
+        <p class="fragment">Acts only on containers in docker-compose.yml.</p>
       </section>
       <section>
         <h2>Where to learn more</h2>
@@ -1058,7 +1089,6 @@ ENTRYPOINT ["apachectl"]</code></pre>
       <section>
         <h2>Updating container sets</h2>
         <code>docker-compose build <em>optional_service_name</em></code>
-        <p class="fragment">From your container set's directory</p>
       </section>
       <section>
         <pre><code>$ docker-compose up -d
@@ -1089,44 +1119,6 @@ services:
 ├── Dockerfile
 └── docroot/
     └── index.html</code></pre>
-      </section>
-    </section>
-
-    <section>
-      <section>
-        <h1>Moar Conatainz!</h1>
-      </section>
-      <section>
-        <h2>Docker Hub</h2>
-      </section>
-      <section>
-        <h2>Remote images</h2>
-        <p><code>image</code> directive</p>
-      </section>
-      <section>
-        <pre><code>version: '2'
-services:
-    web:
-        build: .
-        ports:
-            - "80:80"
-        volumes:
-            - ./docroot:/var/www
-    db:
-        image: mysql
-        ports:
-            - 3306:3306</code></pre>
-      </section>
-      <section>
-        <pre><code>&lt;your_project_root&gt;
-├── .docker
-│   ├── db
-│   └── web
-│       └── Dockerfile
-├── docker-compose.yml
-└── docroot
-    └── index.html
-        </code></pre>
       </section>
     </section>
 
