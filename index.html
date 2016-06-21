@@ -1033,11 +1033,23 @@ dockerthingy_web_1   apachectl -D FOREGROUND   Up      80/tcp, 9000/tcp</code></
         <p class="fragment">Use it instead of <code>build</code></p>
       </section>
       <section>
+        <h2>Directories for container sets</h2>
+<pre><code>&lt;your_project_dir&gt;
+  ├── .docker
+  │   ├── db
+  │   └── web
+  │       └── Dockerfile
+  ├── docker-compose.yml
+  └── docroot
+      └── index.html</code></pre>
+        <p class="fragment">Just one possibility, do what works for you</p>
+      </section>
+      <section>
         <h2>Database container</h2>
         <pre><code>version: '2'
 services:
   web:
-    build: .
+    build: .docker/web
     ports:
       - "80:80"
   db:
@@ -1068,20 +1080,21 @@ $ docker-compose rm</code></pre>
 
     <section>
       <section>
-        <h1>Containing your files</h1>
+        <h1>Files and Configuration</h1>
       </section>
       <section>
         <h2>Copying in your Dockerfile</h2>
         <code>COPY <em>source/file/path</em> <em>container/file/path</em></code>
+        <p class="fragment">Directories and wildcards accepted</p>
       </section>
       <section>
-        <pre><code>FROM debian:wheezy
+        <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com
 
 RUN apt-get update
 RUN apt-get install -yq apache2
 
-COPY docroot/index.html /var/www
+COPY docroot/index.html /var/www/html
 
 CMD ["-D", "FOREGROUND"]
 ENTRYPOINT ["apachectl"]</code></pre>
@@ -1101,170 +1114,70 @@ $ curl docker.dev
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
       </section>
+      <section data-transition="none">
+        <img src="images/mountingLiveDirectories1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/mountingLiveDirectories2.png">
+      </section>
       <section>
         <h2>Volumes</h2>
+        <p>Mounts one or more directories into a container</p>
+        <code>- <em>local/file/path</em>:/<em>path/on/container</em></code>
+      </section>
+      <section>
         <pre><code>version: '2'
 services:
-    web:
-        build: .
-        ports:
-            - "80:80"
-        volumes:
-            - ./docroot:/var/www</code></pre>
-      </section>
-      <section>
-        <h2>Directory Structure</h2>
-        <pre><code>&lt;your_project_root&gt;
-├── docker-compose.yml
-├── Dockerfile
-└── docroot/
-    └── index.html</code></pre>
-      </section>
-    </section>
-
-    <section>
-      <section>
-        <h1>Configuration</h1>
-      </section>
-      <section>
-        <h2>Environment Directive</h2>
-        <pre><code>wversion: '2'
-services:
-    web:
-        build: .
-        ports:
-            - "80:80"
-        volumes:
-            - ./docroot:/var/www
-    db:
-        image: mysql
-        ports:
-            - 3306:3306
-        environment:
-          - MYSQL_ROOT_PASSWORD=root
-          - MYSQL_DATABASE=drupal8
-          - MYSQL_USER=drupal
-          - MYSQL_PASSWORD=thisisawesome</code></pre>
-      </section>
-    </section>
-    <section>
-      <section>
-        <h1>CLI Containers</h1>
-      </section>
-      <section>
-        <pre><code>/home/tess/dockerthingy
-├── .docker
-│   ├── db
-│   ├── cli
-│   │   └── Dockerfile
-│   └── web
-│       └── Dockerfile
-├── docker-compose.yml
-└── docroot
-└── index.html</code></pre>
-      </section>
-      <section>
-        <pre><code>cli:
-  build: .docker/cli
-  links:
-  - db
-  - web</code></pre>
-      </section>
-      <section>
-<pre><code>volumes_from:
-  - web</code></pre>
-      </section>
-      <section>
-<pre><code>web:
-  build: .docker/web
-  ports:
-  - "80:80"
-  volumes:
-  - ./docroot:/var/www
-  links:
-  - db
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
   db:
-  build: .docker/db
-  ports:
-  - 3306:3306
-  environment:
-  - MYSQL_DB=drupal8
-  - MYSQL_USER=drupal
-  - MYSQL_PASS=thisisawesome
-  cli:
-  build: .docker/cli
-  volumes_from:
-  - web
-  links:
-  - db
-  - web</code></pre>
+    image: mysql
+    ports:
+      - "3306:3306"</code></pre>
+      </section>
+      <!--
+      @todo add a linking comic here
+      -->
+      <section>
+        <h2>Getting config into containers</h2>
+        <p class="fragment">Bake it into the container</p>
+        <p class="fragment">Mount config files via volumes</p>
+        <p class="fragment">Set environment variables</p>
       </section>
       <section>
-<pre><code>CONTAINER ID   COMMAND                STATUS       NAMES
-  245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1
-  ea7441c7d77c   dockerthingy_db        Up 18 secs   dockerthingy_db_1</code></pre>
-      </section>
-    </section>
-
-    <section>
-      <section>
-        <h1>Keeping containers running</h1>
+        <h2>Setting environment variables</h2>
+        <p><code>environment</code> section</p>
+        <code class="fragment">- <em>ENV_VAR_NAME</em>=<em>VALUE</em></code>
       </section>
       <section>
-<pre><code>FROM debian:latest
-  MAINTAINER your_email@example.com
-
-  RUN apt-get update && \
-  apt-get -yq install supervisor
-
-  COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-  CMD ["/usr/bin/supervisord", "-n"]</code></pre>
-      </section>
-      <section>
-        <pre><code>$ docker-compose build cli && docker-compose up -d</code></pre>
-      </section>
-      <section>
-<pre><code>CONTAINER ID   COMMAND                  STATUS       NAMES
-  bd129d8886ee   "/usr/bin/supervisord"   Up 17 secs   dockerthingy_cli_1
-  245fbb0bf255   "apachectl -D FOREGR     Up 53 mins   dockerthingy_web_1
-  ea7441c7d77c   dockerthingy_db          Up 53 mins   dockerthingy_db_1</code></pre>
+        <pre><code>version: '2'
+services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=thisisawesome</code></pre>
+        <small class="fragment">(Scroll down.)</small>
       </section>
     </section>
 
     <section>
       <section>
-        <h1>Tasking into the CLI Container</h1>
-      </section>
-      <section>
-        <code>docker exec &lt;container_id&gt; &lt;command&gt;</code>
-      </section>
-      <section>
-<pre><code>$ docker exec -i -t bd129d8886ee bash -i
-  root@bd129d8886ee:/#
-
-  root@bd129d8886ee:/# ls /var/www/
-  index.html
-
-  root@bd129d8886ee:/# exit
-  $</code></pre>
-      </section>
-      <section>
-<pre><code>$ docker-compose ps
-  Name                  Command           State              Ports
-  -----------------------------------------------------------------------------------
-  dockerthingy_cli_1   /usr/bin/supervisord -n   Up
-  dockerthingy_db_1    /tmp/mysql_run.sh         Up      0.0.0.0:3306->3306/tcp
-  dockerthingy_web_1   apachectl -D FOREGROUND   Up      0.0.0.0:80->80/tcp, 9000/tcp</code></pre>
-      </section>
-      <section>
-<pre><code>$ docker-compose ps -q cli
-  bd129d8886eefb26494996a7d1163d5db2871a288b3695690b8362a4d1be7473
-</code></pre>
-      </section>
-      <section>
-<pre><code>$ docker exec -i -t $(docker-compose ps -q cli) bash -i
-  root@bd129d8886ee:/#</code></pre>
+        <h1>Running Commands</h1>
       </section>
     </section>
 
