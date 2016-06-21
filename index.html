@@ -360,7 +360,13 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
         <p>Basis of Docker's build system</p>
       </section>
       <section>
-        <h2>Structure</h2>
+        <h2>Directory and filename</h2>
+        <pre><code>&lt;your_project_root&gt;
+  └── Dockerfile</code></pre>
+        <p class="fragment"><strong>Always</strong> create a project directory!</p>
+      </section>
+      <section>
+        <h2>Each line has two parts</h2>
         <code>DIRECTIVE parameter</code>
         <p class="fragment"><a href="https://docs.docker.com/">docs.docker.com</a></p>
       </section>
@@ -940,51 +946,92 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
 
     <section>
       <section>
-        <h1>Docker Compose</h1>
+        <h1>Container sets</h1>
       </section>
       <section>
-        <h2>Included with Docker</h2>
-        <p>No additional installation required</p>
+        <img src="images/composeIcon.png"  alt="Docker Compose icon" />
+        <p>Lets you build multiple containers at once</p>
+        <p class="fragment">Included out-of-the-box, replaces Docker Fig</p>
       </section>
       <section>
-        <h2>Community Sourced</h2>
-        <p>Based on Docker Fig</p>
-      </section>
-      <section>
-        <h2>Compose Files</h2>
-        <code>docker-compose.yml</code>
+        <img src="images/composeFileIcon.png" alt="docker-compose.yml" />
         <p>Descriptive, rather than instructive</p>
       </section>
       <section>
-        <pre><code>version: '2'
-services:
-    web:
-        build: .</code></pre>
+        <h2>3 YAML Rules</h2>
+        <p class="fragment">Indentation is significant!</p>
+        <p class="fragment">Section headers end in a full colon (<code>:</code>)</p>
+        <p class="fragment">List items start with a hyphen (<code>-</code>)</p>
       </section>
-      <section>
-        <h2>Overriding Dockerfiles</h2>
-        <pre><code>version: '2'
-services:
-    web:
-        build: .
-        ports:
-          - “80:80”</code></pre>
+      <section data-transition="none">
+        <img src="images/composeFile1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile5.png" />
       </section>
       <section>
         <h2>"Up"ing a container</h2>
-        <pre><code>$ docker-compose up -d</code></pre>
+        <code>docker-compose up -d</code>
+        <p class="fragment"><code>-d</code> for <strong>d</strong>aemon</p>
+      </section>
+      <section data-background="images/containerName1.png" data-background-transition="none" data-background-size="contain" data-transition="none">
+        <pre><code>$ docker-compose up -d
+Creating dockerthingy_web_1
+
+$ docker ps
+CONTAINER ID   COMMAND                STATUS       NAMES
+245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
+      </section>
+      <section data-background="images/containerName2.png" data-background-transition="none" data-background-size="contain" data-transition="none">
+        <pre><code>$ docker-compose up -d
+Creating dockerthingy_web_1
+
+$ docker ps
+CONTAINER ID   COMMAND                STATUS       NAMES
+245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
       </section>
       <section>
+        <h2>Compose container names</h2>
+        <code><em>parentDir_serviceName_index</em></code>
+<pre class="fragment"><code>/home/tess/dockerthingy
+  ├── docker-compose.yml
+  └── Dockerfile</code></pre>
+      </section>
+      <section>
+        <h2>List only your services</h2>
+        <pre><code>$ docker-compose ps
+Name                 Command                   State   Ports
+-----------------------------------------------------------------------
+dockerthingy_web_1   apachectl -D FOREGROUND   Up      80/tcp, 9000/tcp</code></pre>
+      </section>
+      <section>
+        <h2>Stopping & deleting</h2>
         <pre><code>$ docker-compose kill
 $ docker-compose rm</code></pre>
+        <p class="fragment">Acts only on containers in docker-compose.yml.</p>
       </section>
       <section>
-        <pre><code>$ docker ps
-CONTAINER ID   COMMAND                STATUS       NAMES
-245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1
-
-$ pwd
-/home/tess/dockerthingy</code></pre>
+        <h2>Overriding Dockerfiles</h2>
+<pre><code>version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - “80:80”</code></pre>
+        <p class="fragment">Compose always overrides Dockerfiles</p>
+      </section>
+      <section>
+        <h2>Where to learn more</h2>
+        <a href="https://docs.docker.com/compose/compose-file/">docs.docker.com/compose/compose-file</a>
       </section>
     </section>
 
@@ -993,24 +1040,25 @@ $ pwd
         <h1>Containing your files</h1>
       </section>
       <section>
-        <pre><code>COPY path/on/host.txt /target/path/on/container.txt</code></pre>
+        <h2>Copying in your Dockerfile</h2>
+        <code>COPY <em>source/file/path</em> <em>container/file/path</em></code>
       </section>
       <section>
         <pre><code>FROM debian:wheezy
 MAINTAINER your_email@example.com
 
 RUN apt-get update
-RUN apt-get install -y apache2
+RUN apt-get install -yq apache2
 
-COPY index.html /var/www
+COPY docroot/index.html /var/www
 
 CMD ["-D", "FOREGROUND"]
 ENTRYPOINT ["apachectl"]</code></pre>
       </section>
       <section>
         <h2>Updating container sets</h2>
-        <code>docker-compose build</code>
-        <p>From your container set's directory</p>
+        <code>docker-compose build <em>optional_service_name</em></code>
+        <p class="fragment">From your container set's directory</p>
       </section>
       <section>
         <pre><code>$ docker-compose up -d
