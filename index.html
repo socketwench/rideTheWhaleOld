@@ -29,6 +29,7 @@
       <h1>Ride the Whale!</h1>
       <h2>Docker for Drupalists</h2>
       <img src="images/controls.png"/>
+      <p>socketwench.github.io/rideTheWhale</p>
     </section>
 
     <section>
@@ -129,7 +130,7 @@
       <section>
         <h2>Do I need to pay for it?</h2>
         <p>Docker is free and open source!</p>
-        <p>https://github.com/docker/docker</p>
+        <p><a href="https://github.com/docker/docker">github.com/docker/docker</a></p>
       </section>
       <section>
         <h2>Docker Toolbox</h2>
@@ -137,7 +138,7 @@
       </section>
       <section>
         <h2>Installing Toolbox</h2>
-        <p>https://www.docker.com/products/docker-toolbox</p>
+        <p><a href="https://www.docker.com/products/docker-toolbox">docker.com/products/docker-toolbox</a></p>
         <p>Includes Virtualbox</p>
       </section>
       <section>
@@ -195,8 +196,7 @@
       </section>
       <section>
         <h2>Soon, No more Virtualbox!</h2>
-        <p>Docker for Mac & Windows Beta</p>
-        <p><a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">https://blog.docker.com/2016/06/docker-mac-windows-public-beta/</a></p>
+        <p><a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">Docker for Mac & Windows Beta</a></p>
       </section>
     </section>
 
@@ -232,7 +232,7 @@ eval $(docker-machine env default)</code></pre>
       <section>
         <img src="images/dockerHub.png" alt="Docker Hub icon">
         <p>Online registry of pre-made containers</p>
-        <p>https://hub.docker.com/</p>
+        <p><a href="https://hub.docker.com/">hub.docker.com</a></p>
       </section>
       <section data-transition="none">
         <img src="images/hubUpload1.png" />
@@ -259,12 +259,12 @@ eval $(docker-machine env default)</code></pre>
       </section>
       <section>
         <h2>Official Drupal Container</h2>
-        <p>https://hub.docker.com/_/drupal/</p>
+        <p><a href="https://hub.docker.com/_/drupal/">hub.docker.com/_/drupal</a></p>
         <p class="fragment">Good for demos...<span class="fragment">but limited for development</span></p>
       </section>
       <section>
         <h2>Downloading a Container</h2>
-        <pre><code>$ docker pull &lt;image_name&gt;</code></pre>
+        <code>$ docker pull <em>image_name</em></code>
         <p>Where <code>image_name</code> is the name on Docker Hub</p>
       </section>
       <section>
@@ -362,7 +362,7 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
       <section>
         <h2>Structure</h2>
         <code>DIRECTIVE parameter</code>
-        <p class="fragment">https://docs.docker.com/</p>
+        <p class="fragment"><a href="https://docs.docker.com/">docs.docker.com</a></p>
       </section>
       <section data-transition="none" data-background="images/from1.png" data-background-size="contain" data-background-transition="none">
         <h2>The first two directives</h2>
@@ -407,7 +407,7 @@ MAINTAINER your_email@example.com</code></pre>
       </section>
       <section>
         <h2>Using your Dockerfile</h2>
-        <p><code>docker build /path/to/Dockerfile</code></p>
+        <p><code>docker build <em>/path/to/Dockerfile</em></code></p>
       </section>
       <section>
         <pre><code>$ docker build .
@@ -604,7 +604,7 @@ Debian GNU/Linux 7 \n \l</code></pre>
       </section>
       <section>
         <h2>LAMP Tutorials</h2>
-        <p><a href="https://www.linode.com/docs/websites/lamp/">https://www.linode.com/docs/websites/lamp/</a></p>
+        <p><a href="https://www.linode.com/docs/websites/lamp/">linode.com/docs/websites/lamp</a></p>
       </section>
       <section>
         <h2>Installing Apache</h2>
@@ -635,7 +635,7 @@ Fetched 8438 kB in 7s (1094 kB/s)
 Reading package lists...
  ---> eefa2fcb15e7
 Removing intermediate container 8652b461d629
-Step 3 : RUN apt-get install -y apache2
+Step 3 : RUN apt-get install -yq apache2
  ---> Running in ef474ef3a976
 Reading package lists...
 Building dependency tree...
@@ -662,6 +662,11 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       <section>
         <h2>Keywords</h2>
         <p>"headless", "scripted", or "unattended installation"</p>
+      </section>
+      <section>
+        <h2>Non-interactive <code>apt-get</code></h2>
+        <p class="fragment"><code>-yq</code> switch</p>
+        <p class="fragment">"<strong>Y</strong>es to all questions, use <strong>Q</strong>uiet installation."</p>
       </section>
     </section>
 
@@ -710,14 +715,16 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
 apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName
 
 $</code></pre>
-        <pre class="fragment"><code>$ docker ps -a
-CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
-9d0eab0934fe    aa0        "apachectl start"    2 minutes ago       Exited (0) 2 minutes ago</code></pre>
+        <span class="fragment">
+        <pre><code>$ docker ps -a
+CONTAINER ID   IMAGE   COMMAND             CREATED         STATUS
+9d0eab0934fe   aa0     "apachectl start"   2 minutes ago   Exited (0) 2 minutes ago</code></pre>
+        <small>(Scroll right.)</small></span>
       </section>
       <section>
         <h2>Why'd it stop?</h2>
         <p class="fragment">apachectl started apache as a background process</p>
-        <p class="fragment">Then returned "0"</p>
+        <p class="fragment">Then returned <code>0</code></p>
       </section>
       <section>
         <h2>Remember</h2>
@@ -738,9 +745,10 @@ CONTAINER ID    IMAGE      COMMAND              CREATED             STATUS
         <pre><code>$ docker run -d aa0 apachectl -D FOREGROUND
 86414f5548dcecb83d80dec4ec9351a7697b23d11664738f8668167a127ec70e</code></pre>
         <p class="fragment">In a new terminal session:</p>
-        <pre class="fragment"><code>$ docker ps
-CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
-86414f5548dc        aa0           "apachectl -D FOREGR   36 seconds ago      Up 34 seconds</code></pre>
+        <span class="fragment"><pre><code>$ docker ps
+CONTAINER ID   IMAGE   COMMAND                CREATED          STATUS
+86414f5548dc   aa0     "apachectl -D FOREGR   36 seconds ago   Up 34 seconds</code></pre>
+          <small>(Scroll right.)</small></span>
       </section>
       <section>
         <img src="images/finally.png" />
@@ -805,7 +813,7 @@ ENTRYPOINT [“apachectl”]</code></pre>
       <section>
         <h2>Custom Entrypoints</h2>
         <p>The <code>ENTRYPOINT</code> can be any command, even a script!</p>
-        <p class="fragment">Avoid too much automation in your containers</p>
+        <p class="fragment">Avoid too much automation in your containers.</p>
       </section>
       <section>
         <h2>Our Dockerfile so far</h2>
