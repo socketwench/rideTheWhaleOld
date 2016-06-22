@@ -1,0 +1,1444 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Ride the Whale! Docker for Drupalists</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/moby.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      <h1>Ride the Whale!</h1>
+      <h2>Docker for Drupalists</h2>
+      <img src="images/controls.png"/>
+      <p>socketwench.github.io/rideTheWhale</p>
+    </section>
+
+    <section>
+      <section data-background-transition="none"
+               data-background="images/socketwench/socketwench1.png"
+               data-background-size="contain">
+        <aside class="notes">
+          So you might be wondering who is this weird person in front
+          of you. And yes, I do make that
+          face when I get to go on a business trip.
+        </aside>
+      </section>
+      <section data-background-transition="none"
+               data-background="images/socketwench/socketwench2.png"
+               data-background-size="contain">
+        <aside class="notes">
+          My name is Tess Flynn, otherwise known as socketwench.
+        </aside>
+      </section>
+      <section data-background-transition="none"
+               data-background="images/socketwench/socketwench3.png"
+               data-background-size="contain">
+        <aside class="notes">
+          That's wench, not wrench.
+        </aside>
+      </section>
+      <section data-background-transition="none"
+               data-background="images/socketwench/socketwench4.png"
+               data-background-size="contain">
+        <aside class="notes">
+          I'm the module maintainer for Flag, Flag Friend, and
+          Examples.
+        </aside>
+      </section>
+      <section data-background-transition="none"
+               data-background="images/socketwench/socketwench5.png"
+               data-background-size="contain">
+        <aside class="notes">
+          And I work as a Drupal Developer for FFW, the largest Drupal
+          consultancy in the world.
+        </aside>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>"What's wrong with MAMP?"</h1>
+      </section>
+      <section>
+        <h2>Problem #1</h2>
+        <p>No Sandboxing.</p>
+      </section>
+      <section>
+        <h2>What happens outside the repo...</h2>
+        <p class="fragment">...stays on your system forever</p>
+      </section>
+      <section>
+        <h2>Like pulling weeds</h2>
+        <p class="fragment">Files, configuration, old binaries</p>
+        <p class="fragment">Requires discipline and time to find, delete</p>
+      </section>
+      <section>
+        <h2>Hacks</h2>
+        <p class="fragment">Bash aliases, symlinks, multiple network ports</p>
+        <p class="fragment">Works around assumed OS best practices</p>
+      </section>
+      <section>
+        <h2>Problem #2</h2>
+        <p>NOM NOM NOM Resources</p>
+      </section>
+      <section>
+        <h2>Multiple VMs = Duplication</h2>
+        <p class="fragment">And you'll probably need more than one</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources5.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources6.png">
+      </section>
+      <section>
+        <h2>Docker De-duplication by design</h2>
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization6.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization7.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization8.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization9.png" />
+      </section>
+      <section>
+        <h2>Files are also de-duplicated</h2>
+        <p class="fragment">UnionFS only uses the space needed</p>
+        <p class="fragment">Even across containers</p>
+      </section>
+      <section>
+        <h2>Problem #3</h2>
+        <p>"Build tool? You mean this Word doc?"</p>
+      </section>
+      <section>
+        <h2>Instructions aren't enough</h2>
+        <p class="fragment">Because humans are fallible</p>
+      </section>
+      <section>
+        <h2>Each system is unique</h2>
+        <p class="fragment">Because it was built by hand</p>
+        <p class="fragment">Eats productivity, harder to on-ramp, creates weird bugs</p>
+      </section>
+      <section>
+        <h2>Time to learn a build tool</h2>
+        <p class="fragment">Puppet, Chef, Ansible are powerful</p>
+        <p class="fragment">They also have a steeper learning curve</p>
+      </section>
+      <section>
+        <h2>Docker builds in building</h2>
+        <p class="fragment">Consistent dev environments each time</p>
+        <p class="fragment'">No need to install anything else</p>
+      </section>
+      <section>
+        <h2>Built on Linux APIs</h2>
+        <p class="fragment">Enterprise ready tech</p>
+        <p class="fragment">Maintained by Red Hat, Google, IBM and others</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Getting Docker</h1>
+      </section>
+      <section>
+        <h2>Do I need to pay for it?</h2>
+        <p>Docker is free and open source!</p>
+        <p><a href="https://github.com/docker/docker">github.com/docker/docker</a></p>
+      </section>
+      <section>
+        <h2>Docker Toolbox</h2>
+        <p>Easiest way to install on Mac and Windows</p>
+      </section>
+      <section>
+        <h2>Installing Toolbox</h2>
+        <p><a href="https://www.docker.com/products/docker-toolbox">docker.com/products/docker-toolbox</a></p>
+        <p>Includes Virtualbox</p>
+      </section>
+      <section>
+        <img src="images/waitINeedAVM.png"/>
+      </section>
+      <section data-transition="none">
+        <img src="images/linuxAndDocker1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/linuxAndDocker2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/linuxAndDocker3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM6.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM7.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM8.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whyYouNeedAVM9.png" />
+      </section>
+      <section>
+        <h2>Docker Machine</h2>
+        <p>Provides a Docker Host on a VM</p>
+        <p class="fragment">Replaces boot2docker</p>
+      </section>
+      <section>
+        <h2>Docker On Linux</h2>
+        <p>Docker's native environment</p>
+        <p>No need for a VM</p>
+      </section>
+      <section>
+        <h2>Installing on Linux</h2>
+        <p>Use your distro's package manager</p>
+      </section>
+      <section>
+        <h2>Soon, no more Virtualbox!</h2>
+        <p><a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">Docker for Mac & Windows Beta</a></p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Quick, pull,<br>and run</h1>
+      </section>
+      <section>
+        <img src="images/quickstartTerminal.png" />
+        <p>Starts default docker machine</p>
+        <p>Sets <code>$DOCKER_HOST</code> environment variable</p>
+      </section>
+      <section>
+        <img src="images/quickstartScreencap.png">
+      </section>
+      <section>
+        <h2>Without Quickstart</h2>
+        <p>In ~/.bashrc</p>
+<pre><code>docker-machine start default
+eval $(docker-machine env default)</code></pre>
+        <p class="fragment">May slow down terminal startup</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/nowICanRunContainers1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nowICanRunContainers2.png" />
+      </section>
+      <section>
+        <h2>Docker works like Vagrant</h2>
+        <p class="fragment">You <em>rarely</em> build a container from scratch</p>
+      </section>
+      <section>
+        <img src="images/dockerHub.png" alt="Docker Hub icon">
+        <p>Online registry of pre-made containers</p>
+        <p><a href="https://hub.docker.com/">hub.docker.com</a></p>
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/hubUpload6.png" />
+      </section>
+      <section>
+        <h2>Official containers</h2>
+        <p>Vetted and regularly updated</p>
+        <p>MySQL, PHP, Apache, many Linux Distros</p>
+      </section>
+      <section>
+        <h2>Official Drupal Container</h2>
+        <p><a href="https://hub.docker.com/_/drupal/">hub.docker.com/_/drupal</a></p>
+        <p class="fragment">Good for demos...<span class="fragment">but limited for development</span></p>
+      </section>
+      <section>
+        <h2>Downloading a Container</h2>
+        <code>$ docker pull <em>image_name</em></code>
+        <p>Where <code>image_name</code> is the name on Docker Hub</p>
+      </section>
+      <section>
+        <h2>Getting started</h2>
+        <pre><code>$ docker pull debian</code></pre>
+      </section>
+      <section>
+        <h2>Running a Container</h2>
+        <code>docker run <em>image_name</em> <em>command</em></code>
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerRun5.png" />
+      </section>
+      <section>
+        <img src="images/wereIn.png" />
+      </section>
+      <section data-transition="none" data-background="images/dockerPS1.png" data-background-size="contain" data-background-transition="none">
+        <h2>Listing containers</h2>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section data-transition="none" data-background="images/dockerPS2.png" data-background-size="contain" data-background-transition="none">
+        <h2>Listing containers</h2>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section data-transition="none" data-background="images/dockerPS3.png" data-background-size="contain" data-background-transition="none">
+        <h2>Listing containers</h2>
+        <pre><code>$ docker ps
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+$</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section>
+        <h2>"A container is just a process."</h2>
+        <p class="fragment">Not exactly true, but close</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerIntersection1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerIntersection2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerIntersection3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerIntersection4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerIntersection5.png" />
+      </section>
+      <section>
+        <h2>Listing all containers</h2>
+        <pre><code>$ docker ps -a
+CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
+0c6142a4488a       debian       "/bin/bash"        8 seconds ago       Exited</code></pre>
+      </section>
+      <section>
+        <img src="images/butHowDoICustomizeAndShare.png" />
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>A server in<br />a text file</h1>
+      </section>
+      <section>
+        <h2>Ingredients</h2>
+        <p>The starting container</p>
+        <p>Who maintains this file</p>
+        <p>Other commands & config</p>
+        <p>What to run when ready</p>
+      </section>
+      <section>
+        <img src="images/dockerfile.png" alt="Dockerfile icon">
+        <p>Basis of Docker's build system</p>
+      </section>
+      <section>
+        <h2>Directory and filename</h2>
+        <pre><code>&lt;your_project_root&gt;
+  └── Dockerfile</code></pre>
+        <p class="fragment"><strong>Always</strong> create a project directory!</p>
+      </section>
+      <section>
+        <h2>Each line has two parts</h2>
+        <code>DIRECTIVE parameter</code>
+        <p class="fragment"><a href="https://docs.docker.com/">docs.docker.com</a></p>
+      </section>
+      <section data-transition="none" data-background="images/from1.png" data-background-size="contain" data-background-transition="none">
+        <h2>The first two directives</h2>
+        <pre><code>FROM debian:wheezy
+MAINTAINER your_email@example.com</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section data-transition="none" data-background="images/from2.png" data-background-size="contain" data-background-transition="none">
+        <h2>The first two directives</h2>
+        <pre><code>FROM debian:wheezy
+MAINTAINER your_email@example.com</code></pre>
+        <p>&nbsp;</p>
+      </section>
+      <section>
+        <h2>Turtles all the way down</h2>
+        <p class="fragment">All containers are build on top of another container</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/turtles5.png" />
+      </section>
+      <section>
+        <h2>"scratch" container</h2>
+        <p>Parent of all Docker containers</p>
+        <p class="fragment">Just an empty *.tar.gz file</p>
+      </section>
+      <section>
+        <h2>FROM directive</h2>
+        <code>FROM name:version</code>
+        <p class="fragment">Version is optional, defaults to "latest"</p>
+      </section>
+      <section>
+        <h2>Using your Dockerfile</h2>
+        <p><code>docker build <em>/path/to/Dockerfile</em></code></p>
+      </section>
+      <section>
+        <pre><code>$ docker build .
+
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM debian:wheezy
+ ---> 4c82789231a5
+Step 2 : MAINTAINER your_email@example.com
+ ---> Running in 908f461e93e4
+ ---> c9c74cdf1e1d
+Removing intermediate container 908f461e93e4
+Successfully built c9c74cdf1e1d
+
+$</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/nothing1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nothing2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/nothing3.png" />
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Images</h1>
+      </section>
+      <section>
+        <h2>VMs are like Pudding</h2>
+        <p>It's one big blob of stuff</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk5.png">
+      </section>
+      <section>
+        <h2>Containers are like Cake</h2>
+        <p>They have layers!</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk6.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk7.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk8.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk9.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/VMvsContainerDisk10.png">
+      </section>
+      <section>
+        <h2>It's not just where you're FROM</h2>
+        <p>Each line in the Dockerfile is like a commit</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/build1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build6.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build7.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build8.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/build9.png" />
+      </section>
+      <section>
+        <pre><code>$ docker build .
+
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM debian:wheezy
+ ---> 4c82789231a5
+Step 2 : MAINTAINER your_email@example.com
+ ---> Running in 908f461e93e4
+ ---> c9c74cdf1e1d
+Removing intermediate container 908f461e93e4
+Successfully built c9c74cdf1e1d
+
+$</code></pre>
+      </section>
+      <section>
+        <h2>Image History</h2>
+        <pre><code>$ docker history c9c74cdf1e1d
+
+IMAGE          CREATED        CREATED BY                                      SIZE                COMMENT
+c9c74cdf1e1d   42 hours ago   /bin/sh -c #(nop) MAINTAINER your_email@examp   0 B
+4c82789231a5   10 days ago    /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
+&lt;missing&gt;      10 days ago    /bin/sh -c #(nop) ADD file:add5fc8cb18678647f   84.93 MB</code></pre>
+        <p class="fragment">(You'll almost never need this.)</p>
+      </section>
+      <section>
+        <h2>You can't <code>run</code> an image</h2>
+        <p class="fragment">Running an image creates a new container!</p>
+      </section>
+      <section>
+        <h2>Container data is ephemeral</h2>
+        <p class="fragment">Exists as long as container exists</p>
+        <p class="fragment">Must be <code>commit</code>ed to an image</p>
+      </section>
+      <section>
+        <h2>Listing images</h2>
+        <pre><code>$ docker images
+REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
+                        64b0d7e8eef9   1 minutes ago     85.02 MB
+debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
+debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
+      </section>
+      <section>
+        <h2>Intermediate containers?</h2>
+        <p class="fragment">We didn't need it any longer</p>
+        <p class="fragment">So we threw them away</p>
+      </section>
+      <section>
+        <h2>Base image</h2>
+        <p>It's just an image</p>
+        <p>Usually whatever image you start with</p>
+      </section>
+      <section>
+        <h2>Starting a Container from an Image</h2>
+        <code>docker run <em>imagehash</em> <em>/path/to/command</em></code>
+      </section>
+      <section data-background="images/nowWereIn.png" data-background-size="contain">
+        <pre><code>$ docker run -i -t c9c /bin/bash
+root@71724ddf264b:/# cat /etc/issue
+Debian GNU/Linux 7 \n \l</code></pre>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Installing Software</h1>
+      </section>
+      <section>
+        <h2>No INSTALL directive</h2>
+        <p class="fragment">It lets the container decide!</p>
+      </section>
+      <section data-background="images/noInstallDirective1.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Base image decides the tool</h2>
+        <p class="fragment">Debian and Ubuntu use <code>apt-get</code></p>
+        <p class="fragment">Cent OS uses <code>yum</code></p>
+      </section>
+      <section data-background="images/noInstallDirective2.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Base image decides the tool</h2>
+        <p>Debian and Ubuntu use <code>apt-get</code></p>
+        <p>Cent OS uses <code>yum</code></p>
+      </section>
+      <section data-background="images/noInstallDirective3.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Base image decides the tool</h2>
+        <p>Debian and Ubuntu use <code>apt-get</code></p>
+        <p>Cent OS uses <code>yum</code></p>
+      </section>
+      <section>
+        <h2>RUN directive</h2>
+        <code>RUN <em>some_command -with arguments</em></code>
+        <p>Runs the specified command in the container</p>
+      </section>
+      <section>
+        <img src="images/thatMeansAnyLinuxTutWorksInDocker.png" />
+      </section>
+      <section>
+        <h2>LAMP Tutorials</h2>
+        <p><a href="https://www.linode.com/docs/websites/lamp/">linode.com/docs/websites/lamp</a></p>
+      </section>
+      <section>
+        <h2>Installing Apache</h2>
+        <pre><code>FROM debian:wheezy
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -y apache2</code></pre>
+      </section>
+      <section>
+        <h2>Updating our image</h2>
+        <p class="fragment">Just use <code>docker build</code>!</p>
+      </section>
+      <section>
+        <pre><code>$ docker build .
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon
+Step 0 : FROM debian:wheezy
+ ---> 60c52dbe9d91
+Step 1 : MAINTAINER your_email@example.com
+ ---> Using cache
+ ---> 64b0d7e8eef9
+Step 2 : RUN apt-get update
+ ---> Running in 8652b461d629
+Get:1 http://security.debian.org wheezy/updates Release.gpg [1554 B]
+...
+Fetched 8438 kB in 7s (1094 kB/s)
+Reading package lists...
+ ---> eefa2fcb15e7
+Removing intermediate container 8652b461d629
+Step 3 : RUN apt-get install -yq apache2
+ ---> Running in ef474ef3a976
+Reading package lists...
+Building dependency tree...
+Reading state information...
+…
+Setting up libswitch-perl (2.16-2) ...
+ ---> aa084388ac30
+Removing intermediate container ef474ef3a976
+Successfully built aa084388ac30</code></pre>
+        <small>(scroll down for more)</small>
+      </section>
+      <section data-background-size="contain" data-background-image="images/newImageID.png">
+        <pre><code>$docker images
+REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
+                        aa084388ac30   2 minutes ago     145 MB
+debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
+debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
+      </section>
+      <section>
+        <h2><code>RUN</code> isn't interactive</h2>
+        <p>Software can require input on installation</p>
+        <p class="fragment">Will cause <code>docker build</code> to hang or fail</p>
+      </section>
+      <section>
+        <h2>Keywords</h2>
+        <p>"headless", "scripted", or "unattended installation"</p>
+      </section>
+      <section>
+        <h2>Non-interactive <code>apt-get</code></h2>
+        <p class="fragment"><code>-yq</code> switch</p>
+        <p class="fragment">"<strong>Y</strong>es to all questions, use <strong>Q</strong>uiet installation."</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Foreground processes,<br>background containers</h1>
+      </section>
+      <section data-background="images/justAddARunRight1.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Starting Apache</h2>
+        <p><code>apachectl</code> command</p>
+      </section>
+      <section data-background="images/justAddARunRight2.png" data-background-size="contain" data-background-transition="none" data-transition="none">
+        <h2>Starting Apache</h2>
+        <p><code>apachectl</code> command</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun5.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun6.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun7.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun8.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/weCantUseRun9.png">
+      </section>
+      <section>
+        <h2>As a run command?</h2>
+        <pre><code>$ docker run -i -t aa0 apachectl start
+apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.7 for ServerName
+
+$</code></pre>
+        <span class="fragment">
+        <pre><code>$ docker ps -a
+CONTAINER ID   IMAGE   COMMAND             CREATED         STATUS
+9d0eab0934fe   aa0     "apachectl start"   2 minutes ago   Exited (0) 2 minutes ago</code></pre>
+        <small>(Scroll right.)</small></span>
+      </section>
+      <section>
+        <h2>Why'd it stop?</h2>
+        <p class="fragment">apachectl started apache as a background process</p>
+        <p class="fragment">Then returned <code>0</code></p>
+      </section>
+      <section>
+        <h2>Remember</h2>
+        <p>A container runs as long as it's process does</p>
+      </section>
+      <section>
+        <h2>Running Apache in the Foreground</h2>
+        <code>apachectl -D FOREGROUND</code>
+        <p class="fragment">Apache switch, not Docker</p>
+      </section>
+      <section>
+        <h2>Running a container in the background</h2>
+        <code>docker run -d</code>
+        <p>'d' for 'daemon'</p>
+      </section>
+      <section>
+        <h2>Getting what we want</h2>
+        <pre><code>$ docker run -d aa0 apachectl -D FOREGROUND
+86414f5548dcecb83d80dec4ec9351a7697b23d11664738f8668167a127ec70e</code></pre>
+        <p class="fragment">In a new terminal session:</p>
+        <span class="fragment"><pre><code>$ docker ps
+CONTAINER ID   IMAGE   COMMAND                CREATED          STATUS
+86414f5548dc   aa0     "apachectl -D FOREGR   36 seconds ago   Up 34 seconds</code></pre>
+          <small>(Scroll right.)</small></span>
+      </section>
+      <section>
+        <img src="images/finally.png" />
+      </section>
+      <section>
+        <h2>Stopping a Background Container</h2>
+        <pre><code>$ docker kill 864
+864
+
+$</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/longCommand1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/longCommand2.png" />
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Default Run Commands</h1>
+      </section>
+      <section>
+        <h2>CMD Directive</h2>
+        <pre><code>CMD [“apachectl”, “-D”, “FOREGROUND”]</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/entrypoints6.png" />
+      </section>
+      <section>
+        <h2>Entrypoint</h2>
+        <p>Actual executable run in container</p>
+        <p class="fragment"><code>docker run</code> command passed as a parameter</p>
+      </section>
+      <section>
+        <h2>Default Entrypoint</h2>
+        <code>/bin/sh -c <em>/your/run/command</em></code>
+        <p class="fragment">May be overridden by your base image!</p>
+      </section>
+      <section>
+        <h2>Specifying an entrypoint</h2>
+        <pre><code>CMD [“-D”, “FOREGROUND”]
+ENTRYPOINT [“apachectl”]</code></pre>
+        <p class="fragment">Use <Code>CMD</Code> to pass parameters</p>
+      </section>
+      <section>
+        <h2>Custom Entrypoints</h2>
+        <p>The <code>ENTRYPOINT</code> can be any command, even a script!</p>
+        <p class="fragment">Avoid too much automation in your containers</p>
+      </section>
+      <section>
+        <h2>Our Dockerfile so far</h2>
+        <pre><code>FROM debian:latest
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -yq apache2
+
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["apachectl"]</code></pre>
+      </section>
+      <section>
+        <h2>Updating an existing container</h2>
+        <code>
+          docker build <em>your_container_id</em>
+        </code>
+      </section>
+      <section>
+        <pre><code>$ docker build .
+
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon
+Step 0 : FROM debian:latest
+ ---> 60c52dbe9d91
+Step 1 : MAINTAINER your_email@example.com
+ ---> Using cache
+ ---> 64b0d7e8eef9
+Step 2 : RUN apt-get update
+ ---> Using cache
+ ---> eefa2fcb15e7
+Step 3 : RUN apt-get install -y apache2
+ ---> Using cache
+ ---> aa084388ac30
+Step 4 : CMD -D FOREGROUND
+ ---> Running in 32b9f66cf1e3
+ ---> 239ae06b7d68
+Removing intermediate container 32b9f66cf1e3
+Step 5 : ENTRYPOINT apachectl
+ ---> Running in 6ac785739695
+ ---> 72b3cac68438
+Removing intermediate container 6ac785739695
+Successfully built 72b3cac68438</code></pre>
+        <small class="fragment">(Scroll down for more.)</small>
+      </section>
+      <section>
+        <h2>Look, Ma, no run command!</h2>
+        <pre><code>$ docker run -d 72b
+988bf0c8cdfdf88c42e3673a65597f78693c07b14070cd535962b13b36884560
+
+$ docker ps
+CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
+988bf0c8cdfd        72b           "apachectl -D FOREGR   4 seconds ago       Up 3 seconds</code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>There's no place like 127.0.0.1</h1>
+      </section>
+      <section>
+        <h2>Opening Ports</h2>
+        <code>EXPOSE <em>port_number</em></code>
+        <p class="fragment">Typically the third-to-last line in your Dockerfile</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin2.png">
+      </section>
+      <section>
+        <h2>Getting the Machine IP</h2>
+        <pre><code>$ docker-machine ip
+192.168.59.103</code></pre>
+      </section>
+      <section>
+        <h2>/etc/hosts</h2>
+        <pre><code>192.168.59.103	docker.dev</code></pre>
+        <p class="fragment">Machine IP may change on restart!</p>
+      </section>
+      <section>
+        <h2><code>EXPOSE</code> alone isn't Enough</h2>
+        <p>Contains must be <code>run</code> with a port mapping!</p>
+      </section>
+      <section>
+        <h2>Mapping Ports on <code>run</code></h2>
+        <code>docker run -d -p <em>x</em>:<em>y</em> <em>your_image_id</em></code>
+        <p class="fragment"><code>x</code> is the port on your machine</p>
+        <p class="fragment"><code>y</code> is the port in the container</p>
+      </section>
+      <section>
+        <pre><code>$ docker run -d -p 80:80 802
+2f4126401306277841aa173794e17703caaa38c8a30709747e4bd0577ba3a44d</code></pre>
+      </section>
+      <section>
+        <img src="images/itWorks.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/theresGotToBeABetterWay3.png" />
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Container sets</h1>
+      </section>
+      <section>
+        <img src="images/composeIcon.png"  alt="Docker Compose icon" />
+        <p>Lets you build multiple containers at once</p>
+        <p class="fragment">Included out-of-the-box, replaces Docker Fig</p>
+      </section>
+      <section>
+        <img src="images/composeFileIcon.png" alt="docker-compose.yml" />
+        <p>Descriptive, rather than instructive</p>
+      </section>
+      <section>
+        <h2>3 YAML Rules</h2>
+        <p class="fragment">Indentation is significant!</p>
+        <p class="fragment">Section headers end in a full colon (<code>:</code>)</p>
+        <p class="fragment">List items start with a hyphen (<code>-</code>)</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/composeFile5.png" />
+      </section>
+      <section>
+        <h2>"Up"ing a container</h2>
+        <code>docker-compose up -d</code>
+        <p class="fragment"><code>-d</code> for <strong>d</strong>aemon</p>
+      </section>
+      <section data-background="images/containerName1.png" data-background-transition="none" data-background-size="contain" data-transition="none">
+        <pre><code>$ cd /your/project/directory
+
+$ docker-compose up -d
+Creating dockerthingy_web_1
+
+$ docker ps
+CONTAINER ID   COMMAND                STATUS       NAMES
+245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
+      </section>
+      <section data-background="images/containerName2.png" data-background-transition="none" data-background-size="contain" data-transition="none">
+        <pre><code>$ cd /your/project/directory
+
+$ docker-compose up -d
+Creating dockerthingy_web_1
+
+$ docker ps
+CONTAINER ID   COMMAND                STATUS       NAMES
+245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
+      </section>
+      <section>
+        <h2>Compose container names</h2>
+        <code><em>parentDir_serviceName_index</em></code>
+<pre class="fragment"><code>/home/tess/dockerthingy
+  ├── docker-compose.yml
+  └── Dockerfile</code></pre>
+      </section>
+      <section>
+        <h2>List only your services</h2>
+        <pre><code>$ docker-compose ps
+Name                 Command                   State   Ports
+-----------------------------------------------------------------------
+dockerthingy_web_1   apachectl -D FOREGROUND   Up      80/tcp, 9000/tcp</code></pre>
+      </section>
+      <section>
+        <h2>Overriding Dockerfiles</h2>
+<pre><code>version: '2'
+  services:
+    web:
+      build: .
+      ports:
+        - “80:80”</code></pre>
+        <p class="fragment">Compose always overrides Dockerfiles</p>
+      </section>
+      <section>
+        <h2>Adding Containers from Hub</h2>
+        <code>image: <em>name_on_hub</em></code>
+        <p class="fragment">Use it instead of <code>build</code></p>
+      </section>
+      <section>
+        <h2>Directories for container sets</h2>
+<pre><code>&lt;your_project_dir&gt;
+  ├── .docker
+  │   ├── db
+  │   └── web
+  │       └── Dockerfile
+  ├── docker-compose.yml
+  └── docroot
+      └── index.html</code></pre>
+        <p class="fragment">Just one possibility, do what works for you</p>
+      </section>
+      <section>
+        <h2>Database container</h2>
+        <pre><code>version: '2'
+services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+  db:
+    image: mysql
+      ports:
+       - "3306:3306"</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/reUpAndWhoa3.png" />
+      </section>
+      <section>
+        <h2>Stopping & deleting</h2>
+        <pre><code>$ docker-compose kill
+$ docker-compose rm</code></pre>
+        <p class="fragment">Acts only on containers in docker-compose.yml.</p>
+      </section>
+      <section>
+        <h2>Where to learn more</h2>
+        <a href="https://docs.docker.com/compose/compose-file/">docs.docker.com/compose/compose-file</a>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Files and Configuration</h1>
+      </section>
+      <section>
+        <h2>Copying in your Dockerfile</h2>
+        <code>COPY <em>source/file/path</em> <em>container/file/path</em></code>
+        <p class="fragment">Directories and wildcards accepted</p>
+      </section>
+      <section>
+        <pre><code>FROM debian:latest
+MAINTAINER your_email@example.com
+
+RUN apt-get update
+RUN apt-get install -yq apache2
+
+COPY docroot/index.html /var/www/html
+
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["apachectl"]</code></pre>
+      </section>
+      <section>
+        <h2>Updating container sets</h2>
+        <code>docker-compose build <em>optional_service_name</em></code>
+      </section>
+      <section>
+        <pre><code>$ docker-compose up -d
+
+$ curl docker.dev
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Behold, my amazing page!&lt;/h1&gt;
+&lt;p>Okay, yeah, it sucks. Sorry.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+      <section data-transition="none">
+        <img src="images/mountingLiveDirectories1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/mountingLiveDirectories2.png">
+      </section>
+      <section>
+        <h2>Volumes</h2>
+        <p>Mounts one or more directories into a container</p>
+        <code>- <em>local/file/path</em>:/<em>path/on/container</em></code>
+      </section>
+      <section>
+        <pre><code>version: '2'
+services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"</code></pre>
+      </section>
+      <section>
+        <img src="images/dbNameAndPass.png" />
+      </section>
+      <section>
+        <h2>Getting config into containers</h2>
+        <p class="fragment">Bake it into the container</p>
+        <p class="fragment">Mount config files via volumes</p>
+        <p class="fragment">Set environment variables</p>
+      </section>
+      <section>
+        <h2>Setting environment variables</h2>
+        <p><code>environment</code> section</p>
+        <code class="fragment">- <em>ENV_VAR_NAME</em>=<em>VALUE</em></code>
+      </section>
+      <section>
+        <pre><code>version: '2'
+services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=thisisawesome</code></pre>
+        <small class="fragment">(Scroll down.)</small>
+      </section>
+      <section>
+        <h2>Now for Drupal!</h2>
+        <p>Download, extract to <code>docroot/</code></p>
+        <p>Create files directory and settings.php as normal</p>
+      </section>
+      <section data-background-image="images/isntThereAPremadeContainer1.png" data-background-size="contain" data-transition="none" data-background-transition="none">
+        <h2>But there's a problem...</h2>
+        <p class="fragment">There's no PHP on our web container!</p>
+        <p class="fragment">We could update it, but it'd be more to maintain.</p>
+      </section>
+      <section data-background-image="images/isntThereAPremadeContainer2.png" data-background-size="contain" data-transition="none" data-background-transition="none">
+        <h2>But there's a problem...</h2>
+        <p>There's no PHP on our web container!</p>
+        <p>We could update it, but it'd be more to maintain.</p>
+      </section>
+      <section>
+        <h2>Replacing our web container</h2>
+        <pre><code>FROM php:apache
+MAINTAINER your_email@example.com
+
+RUN apt-get update && apt-get install -y \
+libfreetype6-dev \
+libjpeg62-turbo-dev \
+libmcrypt-dev \
+libpng12-dev \
+libicu-dev
+
+RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></pre>
+      </section>
+      <section>
+        <h2>Kill, build, up</h2>
+        <p class="fragment">You may need to <code>docker-compose rm</code></p>
+        <p class="fragment">Network connections created on build</p>
+      </section>
+      <section>
+        <h2>Never get too attached!</h2>
+        <p>Always be willing to jump containers</p>
+      </section>
+      <section>
+        <img src="images/d8installScreen.png" />
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>What about Drush?</h1>
+      </section>
+      <section>
+        <img src="images/alreadyHaveDrush.png" />
+      </section>
+      <section>
+        <h2>Problems with local install</h2>
+        <p>Different versions & configuration of PHP</p>
+        <p>Drush versions may be significant</p>
+      </section>
+      <section>
+        <img src="images/putDrushInAContainer.png" />
+      </section>
+      <section>
+        <h2>There's a container for that</h2>
+        <code>docker pull drush/drush</code>
+      </section>
+      <section>
+        <h2>"Stealing" volumes</h2>
+        <p><code>volumes_from</code> mounts all volumes from another container</p>
+        <p>Volumes <strong>not</strong> unmounted from other containers</p>
+      </section>
+      <section>
+        <pre><code>services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=thisisawesome
+  drush:
+    image: drush/drush
+    volumes_from:
+      - web</code></pre>
+        <small class="fragment">(Scroll down.)</small>
+      </section>
+      <section>
+        <h2>Running a container in a set</h2>
+        <code>docker-compose run <em>service_name</em></code>
+        <p class="fragment">Beware! Creates a (tiny) new container each time</p>
+      </section>
+      <section>
+        <pre><code>$ docker-compose run drush --root=/var/www/html --uri=http://web/ status
+Drupal version                  :  8.1.3
+Site URI                        :  http://web/
+Database driver                 :  mysql
+Database hostname               :  db
+Database port                   :  3306
+Database username               :  drupal
+Database name                   :  drupal8
+Drupal bootstrap                :  Successful
+PHP OS                          :  Linux
+Install profile                 :  standard
+Drupal root                     :  /var/www/html
+Drupal Settings File            :  sites/default/settings.php
+Site path                       :  sites/default
+File directory path             :  sites/default/files
+Temporary file directory path   :  /tmp</code></pre>
+      </section>
+      <section>
+        <h2>Where to go from here</h2>
+        <p class="fragment">Persistent CLI container with multiple tools</p>
+        <p class="fragment">Helper scripts to make things easy</p>
+        <a class="fragment" href="http://deninet.com/blog/1606/docker-scratch-part-6-cli-containers-and-helper-scripts">Docker from Scratch, Part 6 on deninet.com</a>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Ready-made container sets</h1>
+      </section>
+      <section>
+        <h2>Drude</h2>
+        <p>Multi-project Drupal site development</p>
+        <a class="fragment" href="https://github.com/blinkreaction/drude">github.com/blinkreaction/drude</a>
+      </section>
+      <section>
+        <h2>A MAMP Replacement</h2>
+        <p class="fragment">Requires a <a href="https://github.com/blinkreaction/drude/blob/develop/docs/drude-env-setup.md">system-wide one time setup</a></p>
+        <p class="fragment">Includes the Drude Shell Helper (<code>dsh</code>)</p>
+      </section>
+      <section>
+        <h2>Drude Advantages</h2>
+        <p class="fragment">Mac and Windows performance enhancements</p>
+        <p class="fragment">Multiple simultaneous sites</p>
+        <p class="fragment">Documentation</p>
+      </section>
+      <section>
+        <h2>Dropwhale</h2>
+        <p>Drop in D8 module development</p>
+        <a class="fragment" href="https://github.com/socketwench/dropwhale">github.com/socketwench/dropwhale</a>
+      </section>
+      <section>
+        <h2>Dropwhale is for Modules</h2>
+        <p class="fragment">Self-contained in a <code>.docker/</code> directory</p>
+        <p class="fragment">Installs Drupal 8 dev, Drush, Console, XDebug</p>
+      </section>
+      <section>
+        <h2>Dropwhale is Hackable</h2>
+        <p class="fragment">Lightweight containers, simple Dockerfiles</p>
+        <p class="fragment">Helper scripts named for verbs (start, build, drush)</p>
+      </section>
+      <section>
+        <h2>Others</h2>
+        <p><a href="https://github.com/davenuman/bowline">Bowline</a></p>
+        <p><a href="https://github.com/BradJonesLLC/docker-drupal">bradjonesllc/docker-drupal</a></p>
+        <p class="fragment">Build your own!</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h2>Thank you!</h2>
+        <p>socketwench.github.io/rideTheWhale</p>
+      </section>
+    </section>
+
+  </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: false,
+    progress: true,
+    history: true,
+    center: true,
+    width: 1024,
+    height: 763,
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      {src: 'plugin/markdown/marked.js'},
+      {src: 'plugin/markdown/markdown.js'},
+      {src: 'plugin/notes/notes.js', async: true},
+      {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>
