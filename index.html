@@ -1174,6 +1174,22 @@ services:
         <small class="fragment">(Scroll down.)</small>
       </section>
       <section>
+        <h2>Now for Drupal!</h2>
+        <p>Download, extract to <code>docroot/</code></p>
+        <p>Create files directory and settings.php as normal</p>
+      </section>
+      <section data-background-image="images/isntThereAPremadeContainer1.png" data-background-size="contain" data-transition="none" data-background-transition="none">
+        <h2>But there's a problem...</h2>
+        <p class="fragment">There's no PHP on our web container!</p>
+        <p class="fragment">We could update it, but it'd be more to maintain.</p>
+      </section>
+      <section data-background-image="images/isntThereAPremadeContainer2.png" data-background-size="contain" data-transition="none" data-background-transition="none">
+        <h2>But there's a problem...</h2>
+        <p>There's no PHP on our web container!</p>
+        <p>We could update it, but it'd be more to maintain.</p>
+      </section>
+      <section>
+        <h2>Replacing our web container</h2>
         <pre><code>FROM php:apache
 MAINTAINER your_email@example.com
 
@@ -1185,6 +1201,18 @@ libpng12-dev \
 libicu-dev
 
 RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></pre>
+      </section>
+      <section>
+        <h2>Kill, build, up</h2>
+        <p class="fragment">You may need to <code>docker-compose rm</code></p>
+        <p class="fragment">Network connections created on build</p>
+      </section>
+      <section>
+        <h2>Never get too attached!</h2>
+        <p>Always be willing to jump containers</p>
+      </section>
+      <section>
+        <img src="images/d8installScreen.png" />
       </section>
     </section>
 
