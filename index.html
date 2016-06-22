@@ -1220,36 +1220,19 @@ RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></p
       <section>
         <h1>What about Drush?</h1>
       </section>
-    </section>
-
-    <section>
       <section>
-        <h1>Helper Scripts</h1>
+        <h2>Where to install?</h2>
+        <p>On your workstation</p>
+        <p>In a container in your Compose file</p>
       </section>
       <section>
-<pre><code>#!/usr/bin/env bash
-
-  DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-  echo "Starting bash..."
-  docker exec -i -t $(cd $DIR && docker-compose ps -q cli) bash -i</code></pre>
+        <h2>Problems with local install</h2>
+        <p>Different versions & configuration of PHP</p>
+        <p>Drush versions may be significant</p>
       </section>
       <section>
-<pre><code>/home/tess/dockerthingy
-  ├── .docker
-  │   ├── db
-  │   └── web
-  │       └── Dockerfile
-  ├── docker-compose.yml
-  ├── docroot
-  │   └── index.html
-  └── scripts
-      └── docker-bash.sh</code></pre>
-      </section>
-      <section>
-<pre><code>#!/usr/bin/env bash
-  docker kill $(docker ps -q)
-  docker rm $(docker ps -qa)
-  docker rmi $(docker images -q)</code></pre>
+        <h2>There's a container for that</h2>
+        <code>docker pull drush/drush</code>
       </section>
     </section>
 
