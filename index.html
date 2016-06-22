@@ -1221,9 +1221,7 @@ RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></p
         <h1>What about Drush?</h1>
       </section>
       <section>
-        <h2>Where to install?</h2>
-        <p>On your workstation</p>
-        <p>In a container in your Compose file</p>
+        <img src="images/alreadyHaveDrush.png" />
       </section>
       <section>
         <h2>Problems with local install</h2>
@@ -1231,8 +1229,68 @@ RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></p
         <p>Drush versions may be significant</p>
       </section>
       <section>
+        <img src="images/putDrushInAContainer.png" />
+      </section>
+      <section>
         <h2>There's a container for that</h2>
         <code>docker pull drush/drush</code>
+      </section>
+      <section>
+        <h2>"Stealing" volumes</h2>
+        <p><code>volumes_from</code> mounts all volumes from another container</p>
+        <p>Volumes <strong>not</strong> unmounted from other containers</p>
+      </section>
+      <section>
+        <pre><code>services:
+  web:
+    build: .docker/web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=thisisawesome
+  drush:
+    image: drush/drush
+    volumes_from:
+      - web</code></pre>
+        <small class="fragment">(Scroll down.)</small>
+      </section>
+      <section>
+        <h2>Running a container in a set</h2>
+        <code>docker-compose run <em>service_name</em></code>
+        <p class="fragment">Beware! Creates a (tiny) new container each time</p>
+      </section>
+      <section>
+        <pre><code>$ docker-compose run drush --root=/var/www/html --uri=http://web/ status
+Drupal version                  :  8.1.3
+Site URI                        :  http://web/
+Database driver                 :  mysql
+Database hostname               :  db
+Database port                   :  3306
+Database username               :  drupal
+Database name                   :  drupal8
+Drupal bootstrap                :  Successful
+PHP OS                          :  Linux
+Install profile                 :  standard
+Drupal root                     :  /var/www/html
+Drupal Settings File            :  sites/default/settings.php
+Site path                       :  sites/default
+File directory path             :  sites/default/files
+Temporary file directory path   :  /tmp</code></pre>
+      </section>
+      <section>
+        <h2>Where to go from here</h2>
+        <p class="fragment">Persistent CLI container with multiple tools</p>
+        <p class="fragment">Helper scripts to make things easy</p>
+        <a class="fragment" href="http://deninet.com/blog/1606/docker-scratch-part-6-cli-containers-and-helper-scripts">Docker from Scratch, Part 6 on deninet.com</a>
       </section>
     </section>
 
