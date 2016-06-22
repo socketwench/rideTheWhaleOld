@@ -83,8 +83,79 @@
         <p>No Sandboxing.</p>
       </section>
       <section>
+        <h2>What happens outside the repo...</h2>
+        <p class="fragment">...stays on your system forever</p>
+      </section>
+      <section>
+        <h2>Like pulling weeds</h2>
+        <p class="fragment">Files, configuration, old binaries</p>
+        <p class="fragment">Requires discipline and time to find, delete</p>
+      </section>
+      <section>
+        <h2>Hacks</h2>
+        <p class="fragment">Bash aliases, symlinks, multiple network ports</p>
+        <p class="fragment">Works around assumed OS best practices</p>
+      </section>
+      <section>
         <h2>Problem #2</h2>
-        <p>NOM NOM NOM Disk Space</p>
+        <p>NOM NOM NOM Resources</p>
+      </section>
+      <section>
+        <h2>Multiple VMs = Duplication</h2>
+        <p class="fragment">And you'll probably need more than one</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources3.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources4.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources5.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/vmResources6.png">
+      </section>
+      <section>
+        <h2>Docker De-duplication by design</h2>
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization4.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization5.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization6.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization7.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization8.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/osVirtualization9.png" />
+      </section>
+      <section>
+        <h2>Files are also de-duplicated</h2>
+        <p class="fragment">UnionFS only uses the space needed</p>
+        <p class="fragment">Even across containers</p>
       </section>
       <section>
         <h2>Problem #3</h2>
@@ -92,34 +163,27 @@
       </section>
       <section>
         <h2>Instructions aren't enough</h2>
-        <p>Because humans are fallible.</p>
-      </section>
-    </section>
-
-    <!--
-    @todo Reduce or eliminate this section.
-    This section isn't really necessary because it can be more easily explained
-    in context later in the talk. Then we can see how Docker solves are pain
-    points with more practicality.
-    -->
-    <section>
-      <section>
-        <h1>Why Docker?</h1>
+        <p class="fragment">Because humans are fallible</p>
       </section>
       <section>
-        <h2>Sandboxing by design</h2>
+        <h2>Each system is unique</h2>
+        <p class="fragment">Because it was built by hand</p>
+        <p class="fragment">Eats productivity, harder to on-ramp, creates weird bugs</p>
       </section>
       <section>
-        <h2>Painless De-duplication</h2>
+        <h2>Time to learn a build tool</h2>
+        <p class="fragment">Puppet, Chef, Ansible are powerful</p>
+        <p class="fragment">They also have a steeper learning curve</p>
       </section>
       <section>
-        <h2>Baked-in Build Automation</h2>
-        <p>No need to install anything else.</p>
+        <h2>Docker builds in building</h2>
+        <p class="fragment">Consistent dev environments each time</p>
+        <p class="fragment'">No need to install anything else</p>
       </section>
       <section>
-        <h2>Built on Linux</h2>
-        <p>Enterprise ready tech</p>
-        <p>Maintained by Red Hat, Google, IBM and others</p>
+        <h2>Built on Linux APIs</h2>
+        <p class="fragment">Enterprise ready tech</p>
+        <p class="fragment">Maintained by Red Hat, Google, IBM and others</p>
       </section>
     </section>
 
