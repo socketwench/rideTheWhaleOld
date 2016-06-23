@@ -178,7 +178,7 @@
       <section>
         <h2>Docker builds in building</h2>
         <p class="fragment">Consistent dev environments each time</p>
-        <p class="fragment'">No need to install anything else</p>
+        <p class="fragment">No need to install anything else</p>
       </section>
       <section>
         <h2>Built on Linux APIs</h2>
@@ -678,11 +678,11 @@ Debian GNU/Linux 7 \n \l</code></pre>
       </section>
       <section>
         <h2>Installing Apache</h2>
-        <pre><code>FROM debian:wheezy
+        <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com
 
 RUN apt-get update
-RUN apt-get install -y apache2</code></pre>
+RUN apt-get install -yq apache2</code></pre>
       </section>
       <section>
         <h2>Updating our image</h2>
@@ -798,7 +798,7 @@ CONTAINER ID   IMAGE   COMMAND             CREATED         STATUS
       </section>
       <section>
         <h2>Remember</h2>
-        <p>A container runs as long as it's process does</p>
+        <p>A container runs as long as its process does</p>
       </section>
       <section>
         <h2>Running Apache in the Foreground</h2>
@@ -808,7 +808,7 @@ CONTAINER ID   IMAGE   COMMAND             CREATED         STATUS
       <section>
         <h2>Running a container in the background</h2>
         <code>docker run -d</code>
-        <p>'d' for 'daemon'</p>
+        <p>'d' for 'detach'</p>
       </section>
       <section>
         <h2>Getting what we want</h2>
@@ -1045,12 +1045,10 @@ CONTAINER ID        IMAGE         COMMAND                CREATED             STA
       <section>
         <h2>"Up"ing a container</h2>
         <code>docker-compose up -d</code>
-        <p class="fragment"><code>-d</code> for <strong>d</strong>aemon</p>
+        <p class="fragment"><code>-d</code> for <strong>d</strong>etach</p>
       </section>
       <section data-background="images/containerName1.png" data-background-transition="none" data-background-size="contain" data-transition="none">
-        <pre><code>$ cd /your/project/directory
-
-$ docker-compose up -d
+        <pre><code>$ docker-compose up -d
 Creating dockerthingy_web_1
 
 $ docker ps
@@ -1058,9 +1056,7 @@ CONTAINER ID   COMMAND                STATUS       NAMES
 245fbb0bf255   "apachectl -D FOREGR   Up 18 secs   dockerthingy_web_1</code></pre>
       </section>
       <section data-background="images/containerName2.png" data-background-transition="none" data-background-size="contain" data-transition="none">
-        <pre><code>$ cd /your/project/directory
-
-$ docker-compose up -d
+        <pre><code>$ docker-compose up -d
 Creating dockerthingy_web_1
 
 $ docker ps
@@ -1254,22 +1250,35 @@ services:
       </section>
       <section>
         <h2>Replacing our web container</h2>
-        <pre><code>FROM php:apache
-MAINTAINER your_email@example.com
-
-RUN apt-get update && apt-get install -y \
-libfreetype6-dev \
-libjpeg62-turbo-dev \
-libmcrypt-dev \
-libpng12-dev \
-libicu-dev
-
-RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></pre>
+        <pre><code>version: '2'
+services:
+  web:
+    image: socketwench/drupal-base
+    ports:
+      - "80:80"
+    volumes:
+      - ./docroot:/var/www/html
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal8
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=thisisawesome</code></pre>
       </section>
       <section>
         <h2>Kill, build, up</h2>
         <p class="fragment">You may need to <code>docker-compose rm</code></p>
         <p class="fragment">Network connections created on build</p>
+      </section>
+      <section>
+        <h2>Nuke it from Orbit</h2>
+        <pre><code>docker kill $(docker ps -q)
+docker rm $(docker ps -qa)
+docker rmi $(docker images -q)</code></pre>
+        <p class="fragment">It's the only way to be sure.</p>
       </section>
       <section>
         <h2>Never get too attached!</h2>
@@ -1289,8 +1298,8 @@ RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></p
       </section>
       <section>
         <h2>Problems with local install</h2>
-        <p>Different versions & configuration of PHP</p>
-        <p>Drush versions may be significant</p>
+        <p class="fragment">Different versions & configuration of PHP</p>
+        <p class="fragment">Drush versions may be significant</p>
       </section>
       <section>
         <img src="images/putDrushInAContainer.png" />
@@ -1301,8 +1310,8 @@ RUN docker-php-ext-install gd json intl pdo pdo_mysql mbstring opcache</code></p
       </section>
       <section>
         <h2>"Stealing" volumes</h2>
-        <p><code>volumes_from</code> mounts all volumes from another container</p>
-        <p>Volumes <strong>not</strong> unmounted from other containers</p>
+        <p class="fragment"><code>volumes_from</code> mounts all volumes from another container</p>
+        <p class="fragment">Volumes <strong>not</strong> unmounted from other containers</p>
       </section>
       <section>
         <pre><code>services:
