@@ -436,13 +436,13 @@ CONTAINER ID       IMAGE        COMMAND            CREATED             STATUS
       </section>
       <section data-transition="none" data-background="images/from1.png" data-background-size="contain" data-background-transition="none">
         <h2>The first two directives</h2>
-        <pre><code>FROM debian:wheezy
+        <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com</code></pre>
         <p>&nbsp;</p>
       </section>
       <section data-transition="none" data-background="images/from2.png" data-background-size="contain" data-background-transition="none">
         <h2>The first two directives</h2>
-        <pre><code>FROM debian:wheezy
+        <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com</code></pre>
         <p>&nbsp;</p>
       </section>
@@ -483,7 +483,7 @@ MAINTAINER your_email@example.com</code></pre>
         <pre><code>$ docker build .
 
 Sending build context to Docker daemon 2.048 kB
-Step 1 : FROM debian:wheezy
+Step 1 : FROM debian:latest
  ---> 4c82789231a5
 Step 2 : MAINTAINER your_email@example.com
  ---> Running in 908f461e93e4
@@ -581,7 +581,7 @@ $</code></pre>
         <pre><code>$ docker build .
 
 Sending build context to Docker daemon 2.048 kB
-Step 1 : FROM debian:wheezy
+Step 1 : FROM debian:latest
  ---> 4c82789231a5
 Step 2 : MAINTAINER your_email@example.com
  ---> Running in 908f461e93e4
@@ -592,20 +592,6 @@ Successfully built c9c74cdf1e1d
 $</code></pre>
       </section>
       <section>
-        <h2>Image History</h2>
-        <pre><code>$ docker history c9c74cdf1e1d
-
-IMAGE          CREATED        CREATED BY                                      SIZE                COMMENT
-c9c74cdf1e1d   42 hours ago   /bin/sh -c #(nop) MAINTAINER your_email@examp   0 B
-4c82789231a5   10 days ago    /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
-&lt;missing&gt;      10 days ago    /bin/sh -c #(nop) ADD file:add5fc8cb18678647f   84.93 MB</code></pre>
-        <p class="fragment">(You'll almost never need this.)</p>
-      </section>
-      <section>
-        <h2>You can't <code>run</code> an image</h2>
-        <p class="fragment">Running an image creates a new container!</p>
-      </section>
-      <section>
         <h2>Container data is ephemeral</h2>
         <p class="fragment">Exists as long as container exists</p>
         <p class="fragment">Must be <code>commit</code>ed to an image</p>
@@ -614,8 +600,7 @@ c9c74cdf1e1d   42 hours ago   /bin/sh -c #(nop) MAINTAINER your_email@examp   0 
         <h2>Listing images</h2>
         <pre><code>$ docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
-                        64b0d7e8eef9   1 minutes ago     85.02 MB
-debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
+                        c9c74cdf1e1d   1 minutes ago     85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
       </section>
       <section>
@@ -629,15 +614,8 @@ debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
         <p>Usually whatever image you start with</p>
       </section>
       <section>
-        <h2>Starting a Container from an Image</h2>
+        <h2>Starting our custom image</h2>
         <code>docker run <em>imagehash</em> <em>/path/to/command</em></code>
-      </section>
-      <section data-background="images/nowWereIn.png" data-background-size="contain">
-        <pre><code>$ docker run -i -t c9c /bin/bash
-root@71724ddf264b:/# cat /etc/issue
-Debian GNU/Linux 7 \n \l</code></pre>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
       </section>
     </section>
 
@@ -677,6 +655,20 @@ Debian GNU/Linux 7 \n \l</code></pre>
         <p><a href="https://www.linode.com/docs/websites/lamp/">linode.com/docs/websites/lamp</a></p>
       </section>
       <section>
+        <h2><code>RUN</code> isn't interactive</h2>
+        <p>Software can require input on installation</p>
+        <p class="fragment">Will cause <code>docker build</code> to hang or fail</p>
+      </section>
+      <section>
+        <h2>Keywords</h2>
+        <p>"headless", "scripted", or "unattended installation"</p>
+      </section>
+      <section>
+        <h2>Non-interactive <code>apt-get</code></h2>
+        <p class="fragment"><code>-yq</code> switch</p>
+        <p class="fragment">"<strong>Y</strong>es to all questions, use <strong>Q</strong>uiet installation."</p>
+      </section>
+      <section>
         <h2>Installing Apache</h2>
         <pre><code>FROM debian:latest
 MAINTAINER your_email@example.com
@@ -692,14 +684,14 @@ RUN apt-get install -yq apache2</code></pre>
         <pre><code>$ docker build .
 Sending build context to Docker daemon 2.048 kB
 Sending build context to Docker daemon
-Step 0 : FROM debian:wheezy
+Step 0 : FROM debian:latest
  ---> 60c52dbe9d91
 Step 1 : MAINTAINER your_email@example.com
  ---> Using cache
  ---> 64b0d7e8eef9
 Step 2 : RUN apt-get update
  ---> Running in 8652b461d629
-Get:1 http://security.debian.org wheezy/updates Release.gpg [1554 B]
+Get:1 http://security.debian.org latest/updates Release.gpg [1554 B]
 ...
 Fetched 8438 kB in 7s (1094 kB/s)
 Reading package lists...
@@ -721,22 +713,7 @@ Successfully built aa084388ac30</code></pre>
         <pre><code>$docker images
 REPOSITORY   TAG        IMAGE ID       CREATED           VIRTUAL SIZE
                         aa084388ac30   2 minutes ago     145 MB
-debian       wheezy     60c52dbe9d91   4 weeks ago       85.02 MB
 debian       latest     9a61b6b1315e   4 weeks ago       125.2 MB</code></pre>
-      </section>
-      <section>
-        <h2><code>RUN</code> isn't interactive</h2>
-        <p>Software can require input on installation</p>
-        <p class="fragment">Will cause <code>docker build</code> to hang or fail</p>
-      </section>
-      <section>
-        <h2>Keywords</h2>
-        <p>"headless", "scripted", or "unattended installation"</p>
-      </section>
-      <section>
-        <h2>Non-interactive <code>apt-get</code></h2>
-        <p class="fragment"><code>-yq</code> switch</p>
-        <p class="fragment">"<strong>Y</strong>es to all questions, use <strong>Q</strong>uiet installation."</p>
       </section>
     </section>
 
@@ -938,65 +915,6 @@ $ docker ps
 CONTAINER ID        IMAGE         COMMAND                CREATED             STATUS
 988bf0c8cdfd        72b           "apachectl -D FOREGR   4 seconds ago       Up 3 seconds</code></pre>
       </section>
-    </section>
-
-    <section>
-      <section>
-        <h1>There's no place like 127.0.0.1</h1>
-      </section>
-      <section>
-        <h2>Opening Ports</h2>
-        <code>EXPOSE <em>port_number</em></code>
-        <p class="fragment">Typically the third-to-last line in your Dockerfile</p>
-      </section>
-      <section data-transition="none">
-        <img src="images/whatsTheIP1.png" />
-      </section>
-      <section data-transition="none">
-        <img src="images/whatsTheIP2.png" />
-      </section>
-      <section data-transition="none">
-        <img src="images/whatsTheIP3.png" />
-      </section>
-      <section data-transition="none">
-        <img src="images/dockerOnLinux1.png">
-      </section>
-      <section data-transition="none">
-        <img src="images/dockerOnLinux2.png">
-      </section>
-      <section data-transition="none">
-        <img src="images/dockerOnMacAndWin1.png">
-      </section>
-      <section data-transition="none">
-        <img src="images/dockerOnMacAndWin2.png">
-      </section>
-      <section>
-        <h2>Getting the Machine IP</h2>
-        <pre><code>$ docker-machine ip
-192.168.59.103</code></pre>
-      </section>
-      <section>
-        <h2>/etc/hosts</h2>
-        <pre><code>192.168.59.103	docker.dev</code></pre>
-        <p class="fragment">Machine IP may change on restart!</p>
-      </section>
-      <section>
-        <h2><code>EXPOSE</code> alone isn't Enough</h2>
-        <p>Contains must be <code>run</code> with a port mapping!</p>
-      </section>
-      <section>
-        <h2>Mapping Ports on <code>run</code></h2>
-        <code>docker run -d -p <em>x</em>:<em>y</em> <em>your_image_id</em></code>
-        <p class="fragment"><code>x</code> is the port on your machine</p>
-        <p class="fragment"><code>y</code> is the port in the container</p>
-      </section>
-      <section>
-        <pre><code>$ docker run -d -p 80:80 802
-2f4126401306277841aa173794e17703caaa38c8a30709747e4bd0577ba3a44d</code></pre>
-      </section>
-      <section>
-        <img src="images/itWorks.png">
-      </section>
       <section data-transition="none">
         <img src="images/theresGotToBeABetterWay1.png" />
       </section>
@@ -1071,21 +989,47 @@ CONTAINER ID   COMMAND                STATUS       NAMES
   └── Dockerfile</code></pre>
       </section>
       <section>
-        <h2>List only your services</h2>
-        <pre><code>$ docker-compose ps
-Name                 Command                   State   Ports
------------------------------------------------------------------------
-dockerthingy_web_1   apachectl -D FOREGROUND   Up      80/tcp, 9000/tcp</code></pre>
-      </section>
-      <section>
-        <h2>Overriding Dockerfiles</h2>
+        <h2>Mapping Ports</h2>
 <pre><code>version: '2'
   services:
     web:
       build: .
       ports:
         - “80:80”</code></pre>
-        <p class="fragment">Compose always overrides Dockerfiles</p>
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP1.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP2.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/whatsTheIP3.png" />
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnLinux2.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin1.png">
+      </section>
+      <section data-transition="none">
+        <img src="images/dockerOnMacAndWin2.png">
+      </section>
+      <section>
+        <h2>Getting the Machine IP</h2>
+        <pre><code>$ docker-machine ip
+192.168.59.103</code></pre>
+      </section>
+      <section>
+        <h2>/etc/hosts</h2>
+        <pre><code>192.168.59.103	docker.dev</code></pre>
+        <p class="fragment">Machine IP may change on restart!</p>
+      </section>
+      <section>
+        <img src="images/itWorks.png" />
       </section>
       <section>
         <h2>Adding Containers from Hub</h2>
@@ -1412,7 +1356,10 @@ Temporary file directory path   :  /tmp</code></pre>
 
     <section>
       <section>
-        <h2>Thank you!</h2>
+        <h1>Thank you!</h1>
+        <p>&nbsp;</p>
+        <a href="http://deninet.com/tags/docker-scratch">deninet.com/tags/docker-scratch</a>
+        <p>&nbsp;</p>
         <p>socketwench.github.io/rideTheWhale</p>
       </section>
     </section>
