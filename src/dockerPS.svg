@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="dockerPS.svg"
-   inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/dockerPS3.png"
+   inkscape:export-filename="../images/dockerPS3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -581,16 +581,16 @@
      borderopacity="0.57254902"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45254834"
-     inkscape:cx="456.89753"
-     inkscape:cy="471.20341"
+     inkscape:zoom="0.445625"
+     inkscape:cx="519.2453"
+     inkscape:cy="242.99637"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="856"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -605,7 +605,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -693,7 +693,7 @@
          sodipodi:role="line"
          id="tspan12793"
          x="625.94098"
-         y="130.62502"></tspan></text>
+         y="130.62502" /></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot12966"
@@ -705,7 +705,7 @@
            height="46.09375"
            x="761.71875"
            y="545.8125" /></flowRegion><flowPara
-         id="flowPara12972"></flowPara></flowRoot>    <path
+         id="flowPara12972" /></flowRoot>    <path
        inkscape:connector-curvature="0"
        d="m 897.11536,275.93759 c 0,-3.7845 1.3499,-6.85231 3.01508,-6.85231 1.66519,0 3.01509,3.06781 3.01509,6.85231 0,3.78432 -1.3499,6.85214 -3.01509,6.85214 -1.66518,0 -3.01508,-3.06781 -3.01508,-6.85214 z"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.25;stroke-opacity:1"
@@ -721,6 +721,12 @@
      id="layer2"
      inkscape:label="Layer 1"
      style="display:inline">
+    <path
+       transform="translate(-35.315951,293.31249)"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 680.2847,194.42579 a 113.8,57.452427 0 0 0 -113.79883,57.45117 113.8,57.452427 0 0 0 113.79883,57.45313 113.8,57.452427 0 0 0 105.21289,-35.62891 l 41.10352,1.64453 L 793.189,245.27345 A 113.8,57.452427 0 0 0 680.2847,194.42579 Z"
+       id="path13049"
+       inkscape:connector-curvature="0" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot10767"
@@ -734,18 +740,18 @@
            y="375.5"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle" /></flowRegion><flowPara
          id="flowPara10773"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">&quot;docker ps&quot;?</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 680.2847,194.42579 a 113.8,57.452427 0 0 0 -113.79883,57.45117 113.8,57.452427 0 0 0 113.79883,57.45313 113.8,57.452427 0 0 0 105.21289,-35.62891 l 41.10352,1.64453 L 793.189,245.27345 A 113.8,57.452427 0 0 0 680.2847,194.42579 Z"
-       id="path13049"
-       inkscape:connector-curvature="0" />
-  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">&quot;docker ps&quot;?</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 2"
      style="display:inline">
+    <path
+       transform="translate(-35.315951,293.31249)"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 795.45657,329.00782 -96.1875,20.91016 a 184.51068,61.871845 0 0 0 -129.46874,-17.86133 184.51068,61.871845 0 0 0 -184.51172,61.87109 184.51068,61.871845 0 0 0 184.51172,61.87305 184.51068,61.871845 0 0 0 184.50976,-61.87305 184.51068,61.871845 0 0 0 -16.87695,-25.66796 l 58.02343,-39.25196 z"
+       id="path13051"
+       inkscape:connector-curvature="0" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot13037"
@@ -760,11 +766,5 @@
          id="flowPara13043"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
-   id="flowSpan13045">Like the UNIX &quot;ps&quot; </flowSpan>command?</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 795.45657,329.00782 -96.1875,20.91016 a 184.51068,61.871845 0 0 0 -129.46874,-17.86133 184.51068,61.871845 0 0 0 -184.51172,61.87109 184.51068,61.871845 0 0 0 184.51172,61.87305 184.51068,61.871845 0 0 0 184.50976,-61.87305 184.51068,61.871845 0 0 0 -16.87695,-25.66796 l 58.02343,-39.25196 z"
-       id="path13051"
-       inkscape:connector-curvature="0" />
-  </g>
+   id="flowSpan13045">Like the UNIX &quot;ps&quot; </flowSpan>command?</flowPara></flowRoot>  </g>
 </svg>

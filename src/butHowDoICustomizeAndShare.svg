@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="butHowDoICustomizeAndShare.svg"
-   inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/butHowDoICustomizeAndShare.png"
+   inkscape:export-filename="../images/butHowDoICustomizeAndShare.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -581,16 +581,16 @@
      borderopacity="0.57254902"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.64"
-     inkscape:cx="420.73342"
-     inkscape:cy="291.09188"
+     inkscape:zoom="0.63020892"
+     inkscape:cx="524.44655"
+     inkscape:cy="295.69758"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="856"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -605,7 +605,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -715,12 +715,18 @@
            height="413.21552"
            x="-185.61552"
            y="-191.59416" /></flowRegion><flowPara
-         id="flowPara4291"></flowPara></flowRoot>  </g>
+         id="flowPara4291" /></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="eyes"
      style="display:inline">
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 637.59375,311.75 c -97.0813,0 -175.78125,45.1213 -175.78125,100.78125 0,55.65995 78.69995,100.78125 175.78125,100.78125 49.57246,-0.0443 96.80776,-12.08739 130.06836,-33.16211 L 810.25,514.875 782.7832,469.33398 C 802.71044,452.59403 813.37164,432.79835 813.375,412.53125 813.375,356.8713 734.67505,311.75 637.59375,311.75 Z"
+       id="path5182"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscccccs" />
     <path
        inkscape:connector-curvature="0"
        d="m 867.79941,577.25008 c 0,-3.7845 1.3499,-6.85231 3.01508,-6.85231 1.66519,0 3.01509,3.06781 3.01509,6.85231 0,3.78432 -1.3499,6.85214 -3.01509,6.85214 -1.66518,0 -3.01508,-3.06781 -3.01508,-6.85214 z"
@@ -745,11 +751,5 @@
          id="flowPara5178"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">But how </flowPara><flowPara
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
-         id="flowPara5180">do I customize and share a container?</flowPara></flowRoot>    <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 637.59375,311.75 c -97.0813,0 -175.78125,45.1213 -175.78125,100.78125 0,55.65995 78.69995,100.78125 175.78125,100.78125 49.57246,-0.0443 96.80776,-12.08739 130.06836,-33.16211 L 810.25,514.875 782.7832,469.33398 C 802.71044,452.59403 813.37164,432.79835 813.375,412.53125 813.375,356.8713 734.67505,311.75 637.59375,311.75 Z"
-       id="path5182"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="sscccccs" />
-  </g>
+         id="flowPara5180">do I customize and share a container?</flowPara></flowRoot>  </g>
 </svg>
