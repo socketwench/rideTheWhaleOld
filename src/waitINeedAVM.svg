@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="waitINeedAVM.svg"
-   inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/waitINeedAVM.png"
+   inkscape:export-filename="../images/waitINeedAVM.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -582,15 +582,15 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.28"
-     inkscape:cx="832.96196"
-     inkscape:cy="262.76851"
+     inkscape:cx="751.32134"
+     inkscape:cy="294.01851"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="856"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -605,7 +605,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -634,6 +634,11 @@
      id="layer1"
      transform="translate(-35.315951,293.31249)"
      style="display:inline">
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 696.48438 333.3125 A 169.92188 76.953125 0 0 0 526.5625 410.26562 A 169.92188 76.953125 0 0 0 696.48438 487.21875 A 169.92188 76.953125 0 0 0 789.05859 474.77148 C 801.36145 490.30227 818.75 513 818.75 513 L 812.27539 466.5 A 169.92188 76.953125 0 0 0 866.40625 410.26562 A 169.92188 76.953125 0 0 0 696.48438 333.3125 z "
+       transform="translate(35.315951,-293.31249)"
+       id="path10777" />
     <g
        style="stroke:#000000;stroke-opacity:1"
        id="g3585"
@@ -696,12 +701,7 @@
            y="375.5"
            style="-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';font-family:'Anime Ace 2.0 BB';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:30px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:125%;" /></flowRegion><flowPara
          id="flowPara10773"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr;text-anchor:middle;">Wait...I need a VM?</flowPara></flowRoot>    <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 696.48438 333.3125 A 169.92188 76.953125 0 0 0 526.5625 410.26562 A 169.92188 76.953125 0 0 0 696.48438 487.21875 A 169.92188 76.953125 0 0 0 789.05859 474.77148 C 801.36145 490.30227 818.75 513 818.75 513 L 812.27539 466.5 A 169.92188 76.953125 0 0 0 866.40625 410.26562 A 169.92188 76.953125 0 0 0 696.48438 333.3125 z "
-       transform="translate(35.315951,-293.31249)"
-       id="path10777" />
-    <text
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr;text-anchor:middle;">Wait...I need a VM?</flowPara></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="625.94098"
@@ -711,7 +711,7 @@
          sodipodi:role="line"
          id="tspan12793"
          x="625.94098"
-         y="130.62502"></tspan></text>
+         y="130.62502" /></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot12966"
@@ -722,7 +722,7 @@
            height="46.09375"
            x="761.71875"
            y="545.8125" /></flowRegion><flowPara
-         id="flowPara12972"></flowPara></flowRoot>    <path
+         id="flowPara12972" /></flowRoot>    <path
        inkscape:connector-curvature="0"
        d="m 907.12352,286.98038 c -2.23524,0 -4.04732,-1.49903 -4.04732,-3.34813 0,-1.8491 1.81208,-3.34814 4.04732,-3.34814 2.23526,0 4.04734,1.49904 4.04734,3.34814 0,1.8491 -1.81208,3.34813 -4.04734,3.34813 z"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.25;stroke-opacity:1"

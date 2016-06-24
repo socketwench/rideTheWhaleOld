@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="dockerRun.svg"
-   inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/dockerRun5.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="../images/dockerRun5.png"
+   inkscape:export-xdpi="89.646133"
+   inkscape:export-ydpi="89.646133">
   <defs
      id="defs4">
     <marker
@@ -433,16 +433,16 @@
      borderopacity="0.57254902"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.54410883"
-     inkscape:cx="638.49849"
-     inkscape:cy="245.61557"
+     inkscape:zoom="0.53578475"
+     inkscape:cx="669.1565"
+     inkscape:cy="470.10255"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="856"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -457,7 +457,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -496,7 +496,7 @@
            height="207.67905"
            x="64.325363"
            y="224.50479" /></flowRegion><flowPara
-         id="flowPara4211"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4211" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4217"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -514,6 +514,13 @@
      id="layer2"
      inkscape:label="Layer 2"
      style="display:inline">
+    <path
+       transform="translate(-35.315951,293.31249)"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 369.3765,-185.09569 c -89.83022,-2.8e-4 -162.65233,34.14771 -162.65235,76.27148 1e-5,42.12378 72.82212,76.27177 162.65235,76.27149 8.61272,-0.0143 17.20941,-0.34931 25.70898,-1.00196 l 68.45294,79.01951 -33.34747,-83.59568 c 61.50294,-11.62671 101.79586,-39.5976 101.83594,-70.69336 -2e-5,-42.12342 -72.82093,-76.27125 -162.65039,-76.27148 z"
+       id="path4257"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscccccs" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4225"
@@ -526,19 +533,18 @@
            x="290.38309"
            y="88.502586" /></flowRegion><flowPara
          id="flowPara4231"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Run interactively</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 369.3765,-185.09569 c -89.83022,-2.8e-4 -162.65233,34.14771 -162.65235,76.27148 1e-5,42.12378 72.82212,76.27177 162.65235,76.27149 8.61272,-0.0143 17.20941,-0.34931 25.70898,-1.00196 l 68.45294,79.01951 -33.34747,-83.59568 c 61.50294,-11.62671 101.79586,-39.5976 101.83594,-70.69336 -2e-5,-42.12342 -72.82093,-76.27125 -162.65039,-76.27148 z"
-       id="path4257"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="sscccccs" />
-  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Run interactively</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
      style="display:inline">
+    <path
+       transform="translate(-35.315951,293.31249)"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 533.37845,94.59962 419.60697,175.8672 a 129.56967,68.001099 0 0 0 -2.42188,-0.0645 129.56967,68.001099 0 0 0 -129.56836,68.00196 129.56967,68.001099 0 0 0 129.56836,68 129.56967,68.001099 0 0 0 129.57031,-68 129.56967,68.001099 0 0 0 -68.54883,-59.95703 l 55.17188,-89.24805 z"
+       id="path4261"
+       inkscape:connector-curvature="0" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4233"
@@ -550,18 +556,18 @@
            height="121.29926"
            x="457.62903"
            y="218.99118" /></flowRegion><flowPara
-         id="flowPara4239">Emulate a terminal</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 533.37845,94.59962 419.60697,175.8672 a 129.56967,68.001099 0 0 0 -2.42188,-0.0645 129.56967,68.001099 0 0 0 -129.56836,68.00196 129.56967,68.001099 0 0 0 129.56836,68 129.56967,68.001099 0 0 0 129.57031,-68 129.56967,68.001099 0 0 0 -68.54883,-59.95703 l 55.17188,-89.24805 z"
-       id="path4261"
-       inkscape:connector-curvature="0" />
-  </g>
+         id="flowPara4239">Emulate a terminal</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Layer 4"
      style="display:inline">
+    <path
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 695.82767,-172.09179 a 94.650185,56.973896 0 0 0 -94.65039,56.97461 94.650185,56.973896 0 0 0 46.75976,49.07031 L 634.46048,46.81642 685.47806,-58.50976 a 94.650185,56.973896 0 0 0 10.34961,0.36524 94.650185,56.973896 0 0 0 94.65039,-56.97266 94.650185,56.973896 0 0 0 -94.65039,-56.97461 z"
+       id="path4259"
+       inkscape:connector-curvature="0"
+       transform="translate(-35.315951,293.31249)" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4241"
@@ -573,18 +579,18 @@
            height="90.055496"
            x="584.44189"
            y="182.23383" /></flowRegion><flowPara
-         id="flowPara4247">Image name</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 695.82767,-172.09179 a 94.650185,56.973896 0 0 0 -94.65039,56.97461 94.650185,56.973896 0 0 0 46.75976,49.07031 L 634.46048,46.81642 685.47806,-58.50976 a 94.650185,56.973896 0 0 0 10.34961,0.36524 94.650185,56.973896 0 0 0 94.65039,-56.97266 94.650185,56.973896 0 0 0 -94.65039,-56.97461 z"
-       id="path4259"
-       inkscape:connector-curvature="0" />
-  </g>
+         id="flowPara4247">Image name</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Layer 5"
      style="display:inline">
+    <path
+       transform="translate(-35.315951,293.31249)"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 823.76126,94.43751 806.72025,174.9961 A 161.73235,87.298714 0 0 0 676.35501,260.5547 161.73235,87.298714 0 0 0 838.08743,347.85353 161.73235,87.298714 0 0 0 999.81986,260.5547 161.73235,87.298714 0 0 0 866.99759,174.73243 L 823.76126,94.43751 Z"
+       id="path4263"
+       inkscape:connector-curvature="0" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4249"
@@ -596,11 +602,5 @@
            height="130.48863"
            x="665.30811"
            y="421.15662" /></flowRegion><flowPara
-         id="flowPara4255">Command to run in the container</flowPara></flowRoot>    <path
-       transform="translate(-35.315951,293.31249)"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 823.76126,94.43751 806.72025,174.9961 A 161.73235,87.298714 0 0 0 676.35501,260.5547 161.73235,87.298714 0 0 0 838.08743,347.85353 161.73235,87.298714 0 0 0 999.81986,260.5547 161.73235,87.298714 0 0 0 866.99759,174.73243 L 823.76126,94.43751 Z"
-       id="path4263"
-       inkscape:connector-curvature="0" />
-  </g>
+         id="flowPara4255">Command to run in the container</flowPara></flowRoot>  </g>
 </svg>
