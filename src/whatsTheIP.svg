@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="whatsTheIP.svg"
-   inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/whatsTheIP3.png"
+   inkscape:export-filename="../images/whatsTheIP3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -582,15 +582,15 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.64"
-     inkscape:cx="573.64444"
+     inkscape:cx="472.86319"
      inkscape:cy="426.53931"
      inkscape:document-units="px"
-     inkscape:current-layer="layer18"
+     inkscape:current-layer="layer3"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="856"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -605,7 +605,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
       </cc:Work>
@@ -735,14 +735,14 @@
        xml:space="preserve"
        id="flowRoot29066"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(99.436891,-488.34562)"><flowRegion
+       transform="translate(83.436891,-476.34562)"><flowRegion
          id="flowRegion29068"><rect
            id="rect29070"
-           width="282.84271"
-           height="128.16312"
+           width="315.65521"
+           height="128.16309"
            x="302.7301"
            y="530.98059" /></flowRegion><flowPara
-         id="flowPara29074">So just add this to my dockerfile...</flowPara></flowRoot>    <flowRoot
+         id="flowPara29074">So add this to my container set...</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot9148"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
@@ -752,7 +752,7 @@
            height="212.13203"
            x="349.13397"
            y="268.02524" /></flowRegion><flowPara
-         id="flowPara9154"></flowPara></flowRoot>  </g>
+         id="flowPara9154" /></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
